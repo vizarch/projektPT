@@ -1,2 +1,2 @@
-# projektPT
+# Projekt - Podstawy teleinformatyki
 Webscrapper/Metawyszukiwarka
