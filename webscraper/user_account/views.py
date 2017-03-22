@@ -3,13 +3,9 @@ from django.contrib.auth import authenticate, login, logout  # for authenticate 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User  # zarzadzanie uzytkownikami
 from django.core.mail import send_mail  # wysylanie maili
-from webscraper.settings import EMAIL_HOST_USER # import maila tej apki
 
-
+from webscraper.settings import EMAIL_HOST_USER  # import maila tej apki
 HOST_NAME = "127.0.0.1:8000"  # potrzebne podczas generowanie linku aktywacyjnego przy rejestracji
-
-def start_page(request):
-    return render(request, 'user_account/base.html')
 
 
 def login_view(request):
@@ -23,12 +19,12 @@ def login_view(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-    return redirect('user_account:start_page')  # bez wzgledu na wynik logowania przekirowanie do glownej
+    return redirect('main_app:start_page')  # bez wzgledu na wynik logowania przekirowanie do glownej
 
 @login_required(login_url='/')
 def logout_view(request):
     logout(request)
-    return redirect('user_account:start_page')
+    return redirect('main_app:start_page')
 
 def register_view(request):
     """
@@ -44,7 +40,7 @@ def register_view(request):
     # TODO: sprawdzenie emaila
     if User.objects.filter(username=username).exists():
         print("istnieje taki uzytkownik")
-        return redirect('user_account:start_page')  # juz taki username istnieje
+        return redirect('main_app:start_page')  # juz taki username istnieje
 
     new_user = User.objects.create_user(username, email, password, is_active=False)
     new_user.save()
@@ -67,10 +63,10 @@ def register_view(request):
         fail_silently=False
     )
 
-    return redirect('user_account:start_page')
+    return redirect('main_app:start_page')
 
 def activate(request, activation_code):
     user = get_object_or_404(User, username=activation_code)
     user.is_active = True
     user.save()  # django update'uje krotke jak zauwazy ze cos zmieniono
-    return redirect('user_account:start_page')
+    return redirect('main_app:start_page')

@@ -16,34 +16,33 @@
                 <a class="navbar-brand" href="#">Webscraper</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_authenticated %}
-                        <li><a href="#">{{ user }}</a></li>
-                        <li id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                        </a>
-                        </li>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Mój profil</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{% url 'user_account:logout_view' %}">Wyloguj</a></li>
-                            </ul>
-                    {% else %}
+                {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">{{ user }}</a></li>
+                            <li id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Mój profil</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{% url 'user_account:logout_view' %}">Wyloguj</a></li>
+                                </ul>
+                    </ul>
+                {% else %}
+                    <ul class="nav navbar-nav navbar-right">
                         <li data-toggle="modal" data-target="#login"><a href="#">Logowanie</a></li>
                         <li data-toggle="modal" data-target="#register"><a href="#">Rejestracja</a></li>
-                    {% endif %}
-                </ul>
-                <!--<form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="Search...">
-                </form>-->
+                    </ul>
+                {% endif %}
             </div>
         </div>
     </nav>
-
-
-
+    {% if not user.is_authenticated %}
+        {% include "user_account/login_and_register.html" %}
+    {% endif %}
 
 </body>
 </html>

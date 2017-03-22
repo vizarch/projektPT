@@ -1,27 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <title>Strona główna</title>
-</head>
-<body>
-    {% if user.is_authenticated %}
-        Cześć {{ user }}<br/>
-        Chcesz się <a href={% url 'user_account:logout_view' %}> wylogować</a>?
-    {% else %}
-        Nie jesteś zalogowany<br/>
-    {% endif %}
-
-    <!-- LOGIN BUTTON -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login">
-      Zaloguj
-    </button>
-    <!-- lOGIN MODAL -->
+<!-- lOGIN MODAL -->
     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginLabel">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -50,11 +28,6 @@
         </div>
     </div>
 
-
-    <!-- REGISTRATION BUTTON -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#register">
-      Zarejestruj
-    </button>
     <!-- REGISTRATION MODAL -->
     <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel">
         <div class="modal-dialog modal-sm" role="document">
@@ -87,6 +60,3 @@
             </div>
         </div>
     </div>
-
-</body>
-</html>

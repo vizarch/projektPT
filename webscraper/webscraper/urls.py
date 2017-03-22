@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('user_account.urls'))  # od razu po wejsci kieruje do logowania
+    url(r'^user_account', include('user_account.urls')),
+    url(r'^', include('main_app.urls'))  # od razu po wejsci kieruje do main_app.urls
 ]
