@@ -16,3 +16,7 @@ Potem:
 - czasami, po zmianach w bazie danych (models.py) bedzie trzeba zrobić: python manage.py migrate
 - w przeglądarce pod adresem: 127.0.0.1:8000/admin jest panel admina
 - login: admin, hasło: admin123
+
+
+TODO:
+- wywalić katalog ".idea" w katalogu webscraper (coś tam w gitignore trzeba wpisać, ale nie ogarnąłem jeszcze tego)
