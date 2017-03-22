@@ -14,11 +14,12 @@ def login_view(request):
     jezeli logowanie bylo udane, pokazuje sie napis "Czy chcesz sie wylogować?
     miejsce przekierowanie ustalone jest w pliku settings.py na samym dole: LOGIN_REDIRECT
     """
-    username = request.POST.get('username')  # == request.POST['username']
-    password = request.POST.get('password')
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        login(request, user)
+    if request.method == "POST":
+        username = request.POST.get('username')  # == request.POST['username']
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
     return redirect('main_app:start_page')  # bez wzgledu na wynik logowania przekirowanie do glownej
 
 @login_required(login_url='/')
@@ -30,38 +31,39 @@ def register_view(request):
     """
     rejestracja uzytkownikow - na adres e-mail wysylany jest link aktywacyjny
     """
-    username = request.POST.get('username')
-    email = request.POST.get('email')
-    password = request.POST.get('password')
-    # haslo w bazie zapisywane jest w formacie <algorithm>$<iterations>$<salt>$<hash> i używa PBKDF2
-    # https://docs.djangoproject.com/en/1.10/ref/settings/#std:setting-PASSWORD_HASHERS
+    if request.method == "POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        # haslo w bazie zapisywane jest w formacie <algorithm>$<iterations>$<salt>$<hash> i używa PBKDF2
+        # https://docs.djangoproject.com/en/1.10/ref/settings/#std:setting-PASSWORD_HASHERS
 
-    # sprawdzenie czy uzytkownik o podanym 'username' juz istnieje
-    # TODO: sprawdzenie emaila
-    if User.objects.filter(username=username).exists():
-        print("istnieje taki uzytkownik")
-        return redirect('main_app:start_page')  # juz taki username istnieje
+        # sprawdzenie czy uzytkownik o podanym 'username' juz istnieje
+        # TODO: sprawdzenie emaila
+        if User.objects.filter(username=username).exists():
+            print("istnieje taki uzytkownik")
+            return redirect('main_app:start_page')  # juz taki username istnieje
 
-    new_user = User.objects.create_user(username, email, password, is_active=False)
-    new_user.save()
+        new_user = User.objects.create_user(username, email, password, is_active=False)
+        new_user.save()
 
-    activation_code = username  # TODO: zrobic generowanie kodu aktywacyjnego
-    subject = "Webscraper - Activation Code"
-    text = (
-        """
-        Siemka {},
-        \npotwierdz e-mail klikajac w link
-        \n{}/activate/{}/
-        \nMasters of Masters
-        """.format(username, HOST_NAME, activation_code))
+        activation_code = username  # TODO: zrobic generowanie kodu aktywacyjnego
+        subject = "Webscraper - Activation Code"
+        text = (
+            """
+            Siemka {},
+            \npotwierdz e-mail klikajac w link
+            \n{}/activate/{}/
+            \nMasters of Masters
+            """.format(username, HOST_NAME, activation_code))
 
-    send_mail(
-        subject,
-        text,
-        EMAIL_HOST_USER,
-        [email],  # lista adresatow
-        fail_silently=False
-    )
+        send_mail(
+            subject,
+            text,
+            EMAIL_HOST_USER,
+            [email],  # lista adresatow
+            fail_silently=False
+        )
 
     return redirect('main_app:start_page')
 
