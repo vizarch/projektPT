@@ -26,7 +26,7 @@
                                 </a>
                             </li>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#">Mój profil</a></li>
+                                    <li><a href="{% url 'user_account:user_profile' %}">Mój profil</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{% url 'user_account:logout_view' %}">Wyloguj</a></li>
                                 </ul>
@@ -43,6 +43,13 @@
     {% if not user.is_authenticated %}
         {% include "user_account/login_and_register.html" %}
     {% endif %}
+
+<div class="container">
+    <div style="margin-top: 10%">
+    {% block change_password %}
+    {% endblock %}
+    </div>
+</div>
 
 </body>
 </html>

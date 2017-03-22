@@ -3,9 +3,13 @@ from django.contrib.auth import authenticate, login, logout  # for authenticate 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User  # zarzadzanie uzytkownikami
 from django.core.mail import send_mail  # wysylanie maili
+from django.contrib.auth.forms import PasswordChangeForm  # wbudowany formularz zmiany hasla
+
+from django.contrib import messages  # TODO messages
 
 from webscraper.settings import EMAIL_HOST_USER  # import maila tej apki
 HOST_NAME = "127.0.0.1:8000"  # potrzebne podczas generowanie linku aktywacyjnego przy rejestracji
+
 
 
 def login_view(request):
@@ -72,3 +76,32 @@ def activate(request, activation_code):
     user.is_active = True
     user.save()  # django update'uje krotke jak zauwazy ze cos zmieniono
     return redirect('main_app:start_page')
+
+@login_required(login_url='/')
+def user_profile(request):
+    form = PasswordChangeForm(request.user)
+    data = {
+        "form": form
+    }
+    return render(request, 'user_account/user_profile.html')
+
+@login_required(login_url='/')
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            print("poprawna")
+            user = form.save()
+            update_session_auth_hash(request, user)
+            #  messages.success(request, 'Your password was successfully updated!')
+        else:
+            print("niepoprawna")
+            data = {
+                "error": True
+            }
+            return render(request, 'user_account/user_profile.html', data)
+    else:
+        data = {
+            "error": False
+        }
+        return render(request, 'user_account/user_profile.html', data)
