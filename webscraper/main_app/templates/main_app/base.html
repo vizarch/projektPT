@@ -13,7 +13,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Webscraper</a>
+                <a class="navbar-brand" href="{% url 'main_app:start_page' %}">Webscraper</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 {% if user.is_authenticated %}
@@ -47,6 +47,10 @@
 <div class="container">
     <div style="margin-top: 10%">
     {% block change_password %}
+    {% endblock %}
+    {% block change_email %}
+    {% endblock %}
+    {% block account_delete %}
     {% endblock %}
     </div>
 </div>
