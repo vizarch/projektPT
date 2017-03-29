@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- ponizej dodany jest plik CSS oraz JS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main_app/css/base.css' %}">
+    <script src="{% static 'main_app/js/test.js' %}"></script>
 
     <title>Webscraper</title>
 </head>
@@ -13,7 +17,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Webscraper</a>
+                <a class="navbar-brand" href="{% url 'main_app:start_page' %}">Webscraper</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 {% if user.is_authenticated %}
@@ -48,6 +52,14 @@
     <div style="margin-top: 10%">
     {% block change_password %}
     {% endblock %}
+    {% block change_email %}
+    {% endblock %}
+    {% block account_delete %}
+    {% endblock %}
+    </div>
+    <div class="testowo">
+        czesc
+        <button onclick="myFunction()">Try it</button>
     </div>
 </div>
 
