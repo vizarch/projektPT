@@ -51,7 +51,7 @@ def register_view(request):
         new_user.save()
 
         #  generowanie kodu aktywacyjnego: skrot MD5 nazwy uzytkownika+jakis tekst
-        activation_code = hashlib.md5(username.encode('utf-8')+b'dUzOSoLi').hexdigest()
+        activation_code = hashlib.md5(email.encode('utf-8')+b'dUzOSoLi').hexdigest()
         subject = "Webscraper - Activation Code"
         text = (
             """
@@ -69,8 +69,8 @@ def activate(request, username, activation_code):
     """
     metoda do aktywowania konta uzytkownika
     """
-    if activation_code == hashlib.md5(username.encode('utf-8')+b'dUzOSoLi').hexdigest():
-        user = get_object_or_404(User, username=username)
+    user = get_object_or_404(User, username=username)
+    if activation_code == hashlib.md5(user.email.encode('utf-8')+b'dUzOSoLi').hexdigest():
         user.is_active = True
         user.save()  # django domyslnie update'uje krotke, chyba ze wymusimy utworzenie nowej
         logout(request)  # wylogowanie user'a, bo klikniecie w link aktywacyjny od razu go loguje tez
@@ -116,7 +116,7 @@ def change_email(request):
         username = obj_user.username
 
         #  to samo co podczas rejestracji: wysyla na maila link aktywacyjny
-        activation_code = hashlib.md5(username.encode('utf-8') + b'dUzOSoLi').hexdigest()
+        activation_code = hashlib.md5(new_email.encode('utf-8') + b'dUzOSoLi').hexdigest()
         subject = "Webscraper - Change email - activation"
         text = (
             """
