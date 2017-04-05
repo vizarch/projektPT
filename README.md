@@ -19,4 +19,4 @@ Potem:
 
 
 TODO:
-- wywalić katalog ".idea" w katalogu webscraper (coś tam w gitignore trzeba wpisać, ale nie ogarnąłem jeszcze tego)
+- 
