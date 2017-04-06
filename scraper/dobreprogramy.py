@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 import requests
 
@@ -10,7 +11,7 @@ for i in dobreprogramy:
 		pass
 	else:
 		print("------------------------------------------------")
-		print("TYTU£: "+ i.header.h1.a.text)
+		print("TYTUÂ£: "+ i.header.h1.a.text)
 		print("AUTOR: " + i.find(class_="content-info").find('a', rel='author').text)
 		link = i.header.h1.a['href']
 		print("LINK: " + link)
