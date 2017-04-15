@@ -35,10 +35,10 @@
 	linkcolor=black,
 	urlcolor=blue
 }
-
+% kolowanie tabeli
 \usepackage[table]{xcolor}
-
-
+% dodawanie obrazkow
+\usepackage{graphicx}
 
 \fancypagestyle{firstpage}{					% strona tytulowa
 	\renewcommand{\headrulewidth}{0pt}
@@ -219,6 +219,12 @@
 		\end{itemize}
 	\end{itemize}
 	\section{Architektura rozwiązania}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.5]{obrazki/schemat_bd.png}
+			\caption{Schemat bazy danych}
+			\label{fig:db_schema}
+		\end{figure}
 	\begin{longtable}{ | C{5cm} | C{12cm} | @{}m{0pt}@{}}
 		\caption{Opis bazy danych}
 		\label{opis_bazy_danych}

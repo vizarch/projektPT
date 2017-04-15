@@ -1,3 +1,4 @@
+.idea/*
 webscraper/.idea/
 *.pyc
 # latex
@@ -5,3 +6,7 @@ webscraper/.idea/
 *.log
 *.gz
 *.toc
+*.lot
+*.out
+# od schematow bazy danych
+*.bak
