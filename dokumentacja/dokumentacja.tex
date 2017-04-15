@@ -26,6 +26,17 @@
 \usepackage{longtable}
 % ustawienie tabeli w miejscu
 \usepackage{float}
+% spis tresci z linkami do sekcji
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=blue
+}
+
+\usepackage[table]{xcolor}
 
 
 
@@ -57,7 +68,9 @@
 			\vspace*{5cm}
 			{\huge Podstawy Teleinformatyki\\
 				WebScrapper / Metawyszukiwarka\\}
-			\vspace{7cm}
+			\vspace{6cm}
+			{\large \url{https://github.com/vizarch/projektPT}\\}
+			\vspace{1cm}
 			{\large
 			Paweł Soja\\
 			Numer indeksu: 122031\\
@@ -72,6 +85,7 @@
 			dawid.wiktorski@student.put.poznan.pl\\}
 	\end{titlepage}
 	\tableofcontents
+	\listoftables
 	
 	\newpage
 	\section{Opis i uzasadnienie wyboru tematu}
@@ -79,11 +93,15 @@
 	
 	Temat wybraliśmy, ponieważ interesuje nas dziedzina przetwarzania danych. Chcielibyśmy poznać technologie scrapingu, parsowania stron internetowych oraz język Python, framework Django i technologie front-endowe tj. HTML5, Javascript. Jednocześnie nie znaleźliśmy zadowalającego nas serwisu, który udostępniałby takie usługi, dlatego sami zdecydowaliśmy zrobić swój.
 	\section{Podział prac pomiędzy członków zespołu}
-	\begin{table}[h]
+	{\setlength{\arrayrulewidth}{1mm}
+	\setlength{\tabcolsep}{10pt}
+	\renewcommand{\arraystretch}{2.5}
+	{\rowcolors{1}{green!80!yellow!50}{green!70!yellow!40}
+	\begin{table}[H]
 		\centering
 		\caption{Podział prac}
 		\label{podzial_prac}
-		\begin{tabular}{ | C{2cm} | C{6cm} | C{8cm} | @{}m{0pt}@{}}
+		\begin{tabular}{  C{2cm} | C{6cm} | C{8cm} | @{}m{0pt}@{}}
 												% ostatnie krzaki to wysokosc wiersza
 			\hline % ostatnia pusta kolumna to trik -> zle wyrownanie ostatniej kolumny
 			\textbf{Lp.} &	\textbf{Opis} &	\textbf{Osoby} &\\[0.5cm]
@@ -106,6 +124,7 @@
 			\hline
 		\end{tabular}
 	\end{table}
+	}}
 		
 	\section{Opis funkcjonalności}
 	{\large Aktorzy
@@ -179,21 +198,21 @@
 	\end{longtable}
 	\section{Wybrane technologie i uzasadnienie}
 	\begin{itemize}
-		\item Back-end - Python, Django, Celery
+		\item Back-end - \texttt{Python, Django, Celery}
 		\begin{itemize}
 			\item stosunkowo krótki czas tworzenia aplikacji przy jednoczesnym zachowaniu pełnej funkcjonalności, stabilności i wydajności
 		\end{itemize}
-		\item Front-end - HTML5, Javascript
+		\item Front-end - \texttt{HTML5, Javascript}
 		\begin{itemize}
 			\item ???
 		\end{itemize}
-		\item Moduły scrapujące - Python, biblioteka BeautifulSoup, Scrapy
+		\item Moduły scrapujące - \texttt{Python, biblioteka BeautifulSoup, Scrapy}
 		\begin{itemize}
 			\item technologie przeznaczone do parsowania stron,
 			\item duże możliwości,
 			\item łatwa implementacja architektury modułowej
 		\end{itemize}
-		\item Baza danych - SQLite
+		\item Baza danych - \texttt{SQLite}
 		\begin{itemize}
 			\item łatwa integracja z językiem Python,
 			\item w przyszłości prawdopodobnie zostanie zastąpiona inną
@@ -246,7 +265,7 @@
 		\subsection{sekurak.pl}
 		\begin{table}[H]
 			\centering
-			\caption{Parametry artykułów}
+			\caption{Parametry artykułów - sekurak.pl}
 			\label{sekurak_parametry}
 			\begin{tabular}{ | C{2cm} | C{4cm} | C{2cm} | C{2cm} | C{3cm} | C{2cm} | @{}m{0pt}@{}}
 				\hline
@@ -258,7 +277,7 @@
 		\subsection{dobreprogramy.pl/Blog.html} 
 		\begin{table}[H]
 			\centering
-			\caption{Parametry artykułów}
+			\caption{Parametry artykułów - dobreprogramy.pl}
 			\label{dobreprogramy_parametry}
 			\begin{tabular}{ | C{2cm} | C{4cm} | C{2cm} | C{2cm} | C{3cm} | C{2cm} | @{}m{0pt}@{}}
 				\hline
@@ -269,7 +288,7 @@
 		\subsection{niebezpiecznik.pl} 
 		\begin{table}[H]
 			\centering
-			\caption{Parametry artykułów}
+			\caption{Parametry artykułów - niebezpiecznik.pl}
 			\label{niebezpiecznik_parametry}
 			\begin{tabular}{ | C{1.5cm} | C{4cm} | C{1.5cm} | C{1.5cm} | C{1.5cm} | C{3cm} | C{1.5cm} | @{}m{0pt}@{}}
 				\hline
@@ -280,7 +299,7 @@
 		\subsection{zaufanatrzeciastrona.pl} 
 		\begin{table}[H]
 			\centering
-			\caption{Parametry artykułów}
+			\caption{Parametry artykułów - zaufanatrzeciastrona.pl}
 			\label{z3s_parametry}
 			\begin{tabular}{ | C{1.5cm} | C{4cm} | C{1.5cm} | C{1.5cm} | C{1.5cm} | C{3cm} | C{1.5cm} | @{}m{0pt}@{}}
 				\hline
@@ -291,7 +310,7 @@
 		\subsection{wykop.pl} 
 		\begin{table}[H]
 			\centering
-			\caption{Parametry artykułów}
+			\caption{Parametry artykułów - wykop.pl}
 			\label{wykop_parametry}
 			\begin{tabular}{ | C{1.5cm} | C{4cm} | C{1.5cm} | C{1.5cm} | C{1.5cm} | C{3cm} | C{1.5cm} | @{}m{0pt}@{}}
 				\hline

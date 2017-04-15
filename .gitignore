@@ -1,2 +1,7 @@
 webscraper/.idea/
 *.pyc
+# latex
+*.aux
+*.log
+*.gz
+*.toc
