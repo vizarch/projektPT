@@ -17,7 +17,7 @@
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
 % ------------------------------
 % napisy nad tabelami
 \usepackage[font=small,format=plain,up,textfont=normal,up,justification=justified,singlelinecheck=false]{caption}
@@ -93,32 +93,35 @@
 	
 	Temat wybraliśmy, ponieważ interesuje nas dziedzina przetwarzania danych. Chcielibyśmy poznać technologie scrapingu, parsowania stron internetowych oraz język Python, framework Django i technologie front-endowe tj. HTML5, Javascript. Jednocześnie nie znaleźliśmy zadowalającego nas serwisu, który udostępniałby takie usługi, dlatego sami zdecydowaliśmy zrobić swój.
 	\section{Podział prac pomiędzy członków zespołu}
+	\definecolor{azure}{rgb}{0.0, 0.4, 1.0}
+	\definecolor{azure2}{rgb}{0.94, 1.0, 1.0}
+	\definecolor{azure3}{rgb}{0.0, 0.7, 1.0}
 	\begin{table}[H]
-		\setlength\extrarowheight{10pt} % TOOOO :D
+		\setlength\extrarowheight{5pt}
 		\centering
 		\caption{Podział prac}
 		\label{podzial_prac}
-		\begin{tabular}{ | C{2cm} | C{6cm} | C{8cm} | @{}m{0pt}@{}}
-												% ostatnie krzaki to wysokosc wiersza
-			\hline % ostatnia pusta kolumna to trik -> zle wyrownanie ostatniej kolumny
-			\textbf{Lp.} &	\textbf{Opis} &	\textbf{Osoby} &\\[0.5cm]
+		\begin{tabular}{ | C{2cm} | C{6cm} | C{8cm} | }
 			\hline
-			1.	&	Baza danych			&	Wszyscy &\\[0.5cm] 
-			\hline
-			2.	&	Projekt interfejsu	&	Paweł Soja &\\[0.5cm]
-			\hline
-			3.	&	Front-end serwisu	&	Paweł Soja &\\[0.5cm]
-			\hline
-			4.	&	Back-end serwisu	&	Krzysztof Łuczak, Dawid Wiktorski &\\[0.5cm]
-			\hline
-			5.	&	Moduł I				&	Paweł Soja &\\[0.5cm]
-			\hline
-			6.	&	Moduł II			&	Krzysztof Łuczak &\\[0.5cm]
-			\hline
-			7.	&	Moduł III			&	Dawid Wiktorski &\\[0.5cm]
-			\hline
-			8.	&	Testowanie			&	Wszyscy &\\[0.5cm]
-			\hline
+			\rowcolor{azure3}
+			\textbf{Lp.} &	\textbf{Opis} &	\textbf{Osoby} \\ \hline
+			%\rowcolor{azure2}
+			1.	&	Baza danych			&	Wszyscy \\ \hline
+			%\rowcolor{azure3}
+			2.	&	Projekt interfejsu	&	Paweł Soja \\ \hline
+			%\rowcolor{azure2}
+			3.	&	Front-end serwisu	&	Paweł Soja \\ \hline
+			%\rowcolor{azure3}
+			4.	&	Back-end serwisu	&	Krzysztof Łuczak, Dawid Wiktorski \\ \hline
+			%\rowcolor{azure2}
+			5.	&	Moduł I				&	Paweł Soja \\ \hline
+			%\rowcolor{azure3}
+			6.	&	Moduł II			&	Krzysztof Łuczak \\ \hline
+			%\rowcolor{azure2}
+			7.	&	Moduł III			&	Dawid Wiktorski \\ \hline
+			%\rowcolor{azure3}
+			8.	&	Testowanie			&	Wszyscy \\ \hline
+			%\rowcolor{azure2}
 		\end{tabular}
 	\end{table}
 		
@@ -134,65 +137,65 @@
 		\item aplikacja internetowa - prezentuje dane,
 		\item moduł zbierający dane (scraper) - zbiera i przetwarza dane.
 	\end{itemize}}
-	\definecolor{Gray}{gray}{0.9}
-	\definecolor{LightCyan}{rgb}{0.88,1,1}
-	\begin{longtable}{ | C{5cm} | C{8cm} | C{4.5cm} | @{}m{0pt}@{}}
+	\definecolor{azure3}{rgb}{0.0, 0.7, 1.0}
+	\setlength\extrarowheight{10pt}
+	\begin{longtable}{ | C{5cm} | C{8cm} | C{4.5cm} |}
 		\caption{Funkcjonalności}
 		\label{funkcjonalnosci}
 		\endfirsthead % musi byc
-		\multicolumn{4}{c}%
+		\multicolumn{3}{l}%
 		{\tablename\ \thetable\ -- \textit{Kontynuacja}}\hfill  \\
 		\hline
-		\textbf{Funkcja} & \textbf{Opis} & \textbf{Aktorzy} &\\[1cm]
+		\rowcolor{azure3}
+		\textbf{Funkcja} & \textbf{Opis} & \textbf{Aktorzy} \\
 		\hline
 		\endhead
-		% ostatnie krzaki to wysokosc wiersza
-		\hline % ostatnia pusta kolumna to trik -> zle wyrownanie ostatniej kolumny
-		\textbf{Funkcja} & \textbf{Opis} & \textbf{Aktorzy} &\\[1cm]
 		\hline
-		\rowcolor{LightCyan}
+		\rowcolor{azure3}
+		\textbf{Funkcja} & \textbf{Opis} & \textbf{Aktorzy} \\
+		\hline
 		Przeglądanie strony głównej	&	
 		Możliwość przeglądania strony głównej serwisu. &
-		Użytkownicy &\\[1cm] 
+		Użytkownicy \\ 
 		\hline
 		Rejestracja &
 		Możliwość zarejestrowania konta w serwisie. &
-		Użytkownik niezalogowany &\\[1cm]
+		Użytkownik niezalogowany \\
 		\hline
 		Potwierdzenie rejestracji, zmiany hasła lub zmiany adresu e-mail konta&
 		Możliwość potwierdzenia rejestracji, zmiany hasła lub zmiany adresu e-mail konta poprzez kliknięcie link aktywacyjny wysłany pocztą elektroniczną.&
-		Użytkownik niezalogowany &\\[1cm]
+		Użytkownik niezalogowany \\
 		\hline
 		Logowanie &
 		Możliwość logowania się do serwisu.&
-		Użytkownik niezalogowany&\\[1cm]
+		Użytkownik niezalogowany \\
 		\hline
 		Wylogowanie & Możliwość wylogowania się z serwisu. &
-		Użytkownik zalogowany, administrator &\\[1cm]
+		Użytkownik zalogowany, administrator \\
 		\hline
 		Zmiana hasła do konta &
 		Możliwość zmiany hasła do aktywnego konta.&
-		Użytkownik zalogowany, administrator &\\[1cm]
+		Użytkownik zalogowany, administrator \\
 		\hline
 		Zmiana adresu e-mail konta &
 		Możliwość zmiany adresu e-mail konta. &
-		Użytkownik zalogowany, administrator &\\[1cm]
+		Użytkownik zalogowany, administrator \\
 		\hline
 		Ustawienie profilu źródeł &
 		Możliwość wybrania źródeł, z których otrzymywane będą informacje. &
-		Użytkownik zalogowany, administrator &\\[1cm]
+		Użytkownik zalogowany, administrator \\
 		\hline
 		Ustawienie profilu tagów &
 		Możliwość wybrania tagów, na podstawie których filtrowane będą informacje. &
-		Użytkownik zalogowany, administrator &\\[1cm]
+		Użytkownik zalogowany, administrator \\
 		\hline
 		Ustawienie filtra daty &
 		Możliwość wybrania przedziału czasowego, na podstawie którego filtrowane będą informacje. &
-		Użytkownik zalogowany, administrator &\\[1cm]
+		Użytkownik zalogowany, administrator \\
 		\hline
 		Zbieranie danych ze strony i parsowanie ich &
 		Scraper zbiera dane ze strony, parsuje je oraz zapisuje do bazy danych. Jeden scraper zbiera dane z jednej strony. &
-		Scraper &\\[1cm]
+		Scraper \\
 		\hline
 	\end{longtable}
 	\section{Wybrane technologie i uzasadnienie}
@@ -224,43 +227,46 @@
 			\caption{Schemat bazy danych}
 			\label{fig:db_schema}
 		\end{figure}
-	\begin{longtable}{ | C{5cm} | C{12cm} | @{}m{0pt}@{}}
+	\definecolor{azure3}{rgb}{0.0, 0.7, 1.0}
+	\setlength\extrarowheight{10pt}
+	\begin{longtable}{ | C{5cm} | C{12cm} |}
 		\caption{Opis bazy danych}
 		\label{opis_bazy_danych}
 		\endfirsthead % musi byc
-		\multicolumn{3}{c}%
+		\multicolumn{2}{c}%
 		{\tablename\ \thetable\ -- \textit{Kontynuacja}}\hfill \\
 		\hline
-		\textbf{Tabela} & \textbf{Opis} &\\[1cm]
+		\textbf{Tabela} & \textbf{Opis} \\
 		\hline
+		\rowcolor{azure3}
 		\endhead
-		% ostatnie krzaki to wysokosc wiersza
-		\hline % ostatnia pusta kolumna to trik -> zle wyrownanie ostatniej kolumny
-		\textbf{Tabela} & \textbf{Opis} &\\[1cm]
+		\hline
+		\rowcolor{azure3}
+		\textbf{Tabela} & \textbf{Opis} \\
 		\hline	
 		Articles &
-		Zawiera wszystkie sparsowane strony. (teraz kwestia ile je tam trzymać??) &\\[1cm] 
+		Zawiera wszystkie sparsowane strony. (teraz kwestia ile je tam trzymać??) \\ 
 		\hline
 		Tags &
-		Zawiera wszystkie dostępne tagi. Dodanie nowego taga odbywa się automatycznie, gdy scraper podczas parsowania wykryje, że danego taga jeszcze nie ma w bazie. &\\[1.5cm]
+		Zawiera wszystkie dostępne tagi. Dodanie nowego taga odbywa się automatycznie, gdy scraper podczas parsowania wykryje, że danego taga jeszcze nie ma w bazie. \\
 		\hline
 		ArticleTagMap &
-		Łączy daną stronę z odpowiednim tagiem. &\\[1cm]
+		Łączy daną stronę z odpowiednim tagiem. \\
 		\hline
 		Sources &
-		Zawiera wszystkie dostępne źródła, czyli strony internetowe, z których zbieramy dane. Dodanie odbywa się ręcznie. Administrator musi napisać moduł dla danej strony. &\\[1.5cm]
+		Zawiera wszystkie dostępne źródła, czyli strony internetowe, z których zbieramy dane. Dodanie odbywa się ręcznie. Administrator musi napisać moduł dla danej strony. \\
 		\hline
 		ArticleSourceMap &
-		Łączy daną stronę z odpowiednią stroną z której pochodzi. &\\[1cm]
+		Łączy daną stronę z odpowiednią stroną z której pochodzi. \\
 		\hline
 		Users &
-		Zawiera wszystkich użytkowników serwisu. &\\[1cm]
+		Zawiera wszystkich użytkowników serwisu. \\
 		\hline
 		TagsProfile &
-		Łączy użytkownika z tagami, które wybrał. &\\[1cm]
+		Łączy użytkownika z tagami, które wybrał. \\
 		\hline
 		SourceProfile &
-		Łączy użytkownika z źródłami danych, które wybrał. &\\[1cm]
+		Łączy użytkownika z źródłami danych, które wybrał. \\
 		\hline
 	\end{longtable}
 	\section{Interesujące problemy i ich rozwiązania}
