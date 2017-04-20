@@ -6,7 +6,7 @@ class User(models.Model):
     name = models.CharField(max_length=255)
 
 class Articles(models.Model):
-    Source = models.CharField(max_length=100)
+    SourceID = models.ForeignKey(Sources, on_delete=models.CASCADE)
     Title = models.CharField(max_length=100)
     Author = models.CharField(max_length=50)
     Timestamp = models.DateTimeField()
@@ -22,10 +22,6 @@ class Sources(models.Model):
     Name = models.CharField(max_length=50)
 
 # tabele laczace
-class ArticleSourceMap(models.Model):
-    SourceID = models.ForeignKey(Sources, on_delete=models.CASCADE)
-    ArticleID = models.ForeignKey(Articles, on_delete=models.CASCADE)
-
 class ArticleTagMap(models.Model):
     TagID = models.ForeignKey(Tags, on_delete=models.CASCADE)
     ArticleID = models.ForeignKey(Articles, on_delete=models.CASCADE)
