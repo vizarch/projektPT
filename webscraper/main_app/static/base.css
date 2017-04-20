@@ -1,24 +1,37 @@
 body{
     background-color:#071525;
     overflow:hidden;
+    background: -webkit-radial-gradient(bottom right, #340c71, #071525);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 body, html {
+    margin-top: 50px;
     height: 100%;
     width: 100%;
-    margin: 0;
     padding: 0;
+    overflow: hidden;
+    text-align: center;
 }
-
 svg{
     width:100%;
     height:100%;
 }
 
-text{
-    fill:red;
+/* PANEL
+.navbar-fixed-top {
+    background-color: #040c14;
+    border-color: #340c71;
 }
 
+.navbar-fixed-top .navbar-brand  {
 
+    color: #340c71;
+}
+*/
+
+/*Search box*/
 .search-wrapper {
     position: absolute;
     -webkit-transform: translate(-50%, -50%);
@@ -28,7 +41,6 @@ text{
     left:50%;
 }
 .search-wrapper.active {}
-
 .search-wrapper .input-holder {
     overflow: hidden;
     height: 70px;
@@ -48,7 +60,6 @@ text{
     -moz-transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
     transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
 }
-
 .search-wrapper .input-holder .search-input {
     width:100%;
     height: 50px;
@@ -85,7 +96,6 @@ text{
     -moz-transform: translate(0, 10px);
     transform: translate(0, 10px);
 }
-
 .search-wrapper .input-holder .search-icon {
     width:70px;
     height:70px;
@@ -137,7 +147,7 @@ text{
     left: 9px;
     top: 18px;
     border-radius: 2px;
-    background: #974BE0;
+    background: #340c71;
 }
 .search-wrapper .input-holder .search-icon span::after {
     width: 14px;
@@ -145,9 +155,8 @@ text{
     left: 0px;
     top: 0px;
     border-radius: 16px;
-    border: 4px solid #974BE0;
+    border: 4px solid #340c71;
 }
-
 .search-wrapper .close {
     position: absolute;
     z-index: 1;
@@ -207,8 +216,205 @@ text{
     display:none;
     color:#B7B7B7;
 }
-
-
 @media screen and (max-width: 560px) {
     .search-wrapper.active .input-holder {width:200px;}
 }
+
+/*Logo animation*/
+.svg-wrapper {
+    position: absolute;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    top:30%;
+    left:50%;
+}
+.shape {
+    fill: transparent;
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: -474;
+    stroke-width: 4px;
+    stroke-linecap: round;
+    stroke: #FFFFFF;
+
+}
+.text {
+    color: #fff;
+    font-family: 'Roboto Condensed';
+    font-size: 22px;
+    letter-spacing: 8px;
+    line-height: 32px;
+    position: relative;
+    top: -48px;
+}
+@keyframes draw {
+    0% {
+        stroke-dasharray: 140 540;
+        stroke-dashoffset: -474;
+        stroke-width: 8px;
+        stroke-linecap: round;
+    }
+    100% {
+        stroke-dasharray: 760;
+        stroke-dashoffset: 0;
+        stroke-width: 2px;
+        stroke-linecap: round;
+    }
+}
+.svg-wrapper:hover .shape {
+    -webkit-animation: 0.5s draw linear forwards;
+    animation: 0.5s draw linear forwards;
+}
+
+
+/*Tagi*/
+.tag {
+    color: white;
+    position: absolute;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    top:80%;
+    left:50%;
+}
+/* unvisited link */
+a:link {
+    color: white;
+}
+/* visited link */
+a:visited {
+    color: white;
+}
+/* mouse over link */
+a:hover {
+    color: #00faff;
+}
+/* selected link */
+a:active {
+    color: #00faff;
+}
+
+/*Kalendarze*/
+.col-md-4{
+    color: white;
+    position: absolute;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    top:55%;
+    left:50%
+}
+[type="date"] {
+    background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+label {
+    display: block;
+}
+input {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 3px 5px;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+    width: 190px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #340c71;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+    color :white;
+    background: #3f0e90;
+}
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}
+.form .message a {
+    color: #071525;
+    text-decoration: none;
+}
+.form .register-form {
+    display: none;
+}
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 300px;
+    margin: 0 auto;
+}
+.container:before, .container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.container .info {
+    margin: 50px auto;
+    text-align: center;
+}
+.container .info h1 {
+    margin: 0 0 15px;
+    padding: 0;
+    font-size: 36px;
+    font-weight: 300;
+    color: #1a1a1a;
+}
+.container .info span {
+    color: #4d4d4d;
+    font-size: 12px;
+}
+.container .info span a {
+    color: #000000;
+    text-decoration: none;
+}
+.container .info span .fa {
+    color: #EF3B3A;
+}
+
+
