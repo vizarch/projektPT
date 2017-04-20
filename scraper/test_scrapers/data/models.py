@@ -5,8 +5,11 @@ from django.db import models
 class User(models.Model):
     name = models.CharField(max_length=255)
 
+class Sources(models.Model):
+    Name = models.CharField(max_length=50, unique=True)
+
 class Articles(models.Model):
-    SourceID = models.ForeignKey(Sources, on_delete=models.CASCADE)
+    SourceID = models.ForeignKey(Sources, on_delete=models.CASCADE, null=True)
     Title = models.CharField(max_length=100)
     Author = models.CharField(max_length=50)
     Timestamp = models.DateTimeField()
@@ -16,9 +19,6 @@ class Articles(models.Model):
     ImageLink = models.URLField(max_length=100)
 
 class Tags(models.Model):
-    Name = models.CharField(max_length=50)
-
-class Sources(models.Model):
     Name = models.CharField(max_length=50)
 
 # tabele laczace
