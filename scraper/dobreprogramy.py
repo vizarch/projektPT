@@ -75,6 +75,6 @@ def tagfunc():
 			tagi = [i.text for i in artykul.find_all('a')]
 			print("TAGI: " + ', ' .join(tagi))
 		
-#datefunc()
-tagfunc()	
+datefunc()
+#tagfunc()	
 			
