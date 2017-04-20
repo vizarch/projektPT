@@ -6,8 +6,6 @@
 
     <title>Webscraper</title>
 
-
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -51,6 +49,9 @@
 
             evt.preventDefault();
         }
+
+
+
     </script>
     <style type="text/css">
         body{
@@ -282,7 +283,6 @@
             top:30%;
             left:50%;
         }
-
         .shape {
             fill: transparent;
             stroke-dasharray: 140 540;
@@ -292,7 +292,6 @@
             stroke: #FFFFFF;
 
         }
-
         .text {
             color: #fff;
             font-family: 'Roboto Condensed';
@@ -302,7 +301,6 @@
             position: relative;
             top: -48px;
         }
-
         @keyframes draw {
             0% {
                 stroke-dasharray: 140 540;
@@ -317,12 +315,72 @@
                 stroke-linecap: round;
             }
         }
-
         .svg-wrapper:hover .shape {
             -webkit-animation: 0.5s draw linear forwards;
             animation: 0.5s draw linear forwards;
         }
 
+
+        /*Tagi*/
+        .tag {
+            color: white;
+            position: absolute;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            top:80%;
+            left:50%;
+        }
+
+        /* unvisited link */
+        a:link {
+            color: white;
+        }
+        /* visited link */
+        a:visited {
+            color: white;
+        }
+        /* mouse over link */
+        a:hover {
+            color: #00faff;
+        }
+        /* selected link */
+        a:active {
+            color: #00faff;
+        }
+
+        /*Kalendarze*/
+        .col-md-4{
+            color: white;
+            position: absolute;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            top:65%;
+            left:50%
+        }
+        [type="date"] {
+            background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+        }
+        [type="date"]::-webkit-inner-spin-button {
+            display: none;
+        }
+        [type="date"]::-webkit-calendar-picker-indicator {
+            opacity: 0;
+        }
+
+        }
+        label {
+            display: block;
+        }
+        input {
+            border: 1px solid #c4c4c4;
+            border-radius: 5px;
+            background-color: #fff;
+            padding: 3px 5px;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+            width: 190px;
+        }
     </style>
 
 </head>
@@ -391,6 +449,38 @@
     <div class="result-container">
 
     </div>
+</div>
+
+<div class="col-md-4">
+    <label for="dateofbirth">Od</label>
+    <input type="date" name="dateofbirth" id="dateofbirth">
+    <label for="dateofbirth">Do</label>
+    <input type="date" name="dateofbirth" id="dateofbirth">
+</div>
+
+<div class ="tag">
+    <a href=""><b>#</b>tag1(123)</a>
+    <a href=""><b>#</b>tag2(234)</a>
+    <a href=""><b>#</b>tag3(43)</a>
+    <a href=""><b>#</b>tag4(123)</a>
+    <a href=""><b>#</b>tag5(32)</a>
+    <a href=""><b>#</b>tag6(13)</a>
+    <h></h>
+    <a href=""><b>#</b>tag1(123)</a>
+    <a href=""><b>#</b>tag2(234)</a>
+    <a href=""><b>#</b>tag3(43)</a>
+    <a href=""><b>#</b>tag4(123)</a>
+    <a href=""><b>#</b>tag5(32)</a>
+    <a href=""><b>#</b>tag6(13)</a>
+    <h></h>
+    <a href=""><b>#</b>tag1(123)</a>
+    <a href=""><b>#</b>tag2(234)</a>
+    <a href=""><b>#</b>tag3(43)</a>
+    <a href=""><b>#</b>tag4(123)</a>
+    <a href=""><b>#</b>tag5(32)</a>
+    <a href=""><b>#</b>tag6(13)</a>
+
+
 </div>
 
 </body>
