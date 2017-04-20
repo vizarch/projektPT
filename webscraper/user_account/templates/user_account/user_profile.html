@@ -1,6 +1,5 @@
-{% extends 'main_app/base.html' %}
+{% extends 'main_app/Home.html' %}
 
-<!-- TODO: Nie ruszac parametrow !! czyli nawiasow klamrowych -->
 
 {% block change_password %}
 <form action="{% url 'user_account:change_password' %}" method="post">
