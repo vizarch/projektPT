@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Webscraper</title>
+    <title>Web Scraper</title>
 
     {% load static %}
     <!-- ponizej dodany jest plik CSS oraz JS -->
@@ -20,19 +20,73 @@
 </head>
 
 <body>
+    {% if not user.is_authenticated %}
+        <!-- NIE ZALOGOWANY -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'main_app:start_page' %}">Web Scraper</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li data-toggle="modal" data-target="#login"><a href="#">Logowanie</a></li>
+                            <li data-toggle="modal" data-target="#register"><a href="#">Rejestracja</a></li>
+                        </ul>
+                </div>
+            </div>
+        </nav>
+        {% include "user_account/login_and_register.html" %}
 
-{% block nav %}
+    {% else %}
+        <!-- ZALOGOWANY -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'main_app:start_page' %}">Web Scraper</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                                <li><a href="{% url 'main_app:board' %}">Tablica</a></li>
+                                <li><a href="{% url 'main_app:profile' %}">Profil</a></li>
+                                <li><a href="{% url 'main_app:sources_and_tags' %}">Źródła i tagi</a></li>
+                                <li id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                    </a>
+                                </li>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="{% url 'user_account:user_profile' %}">{{ user }}</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{% url 'user_account:logout_view' %}">Wyloguj</a></li>
+                                    </ul>
+                        </ul>
+                </div>
+            </div>
+        </nav>
+    {% endif %}
+
+{% block quick_search %} <!-- szybkie szukanie - mniej funkcjonalnosc -->
 {% endblock %}
 
-<div class="container">
-    <div style="margin-top: 10%">
-        {% block change_password %}
-        {% endblock %}
-        {% block change_email %}
-        {% endblock %}
-        {% block account_delete %}
-        {% endblock %}
-    </div>
+{% block board %} <!-- szukanie dla zalogowanych + wyswietlenie wynikow (cos w stylu tablicy z fejsa) -->
+{% endblock %}
+
+{% block profile %} <!-- ustawienie swojego profilu, czyli zrodel i tagow -->
+{% endblock %}
+
+{% block sources_and_tags %}
+{% endblock %}
+
+{% block change_password %}
+{% endblock %}
+
+{% block change_email %}
+{% endblock %}
+
+{% block account_delete %}
+{% endblock %}
+
 
 
 </div>
