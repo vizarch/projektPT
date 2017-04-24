@@ -22,8 +22,8 @@ def dobreprogramy_scraper():
 
     dobreprogramy_articles = dobreprogramy.scrapshot()
     for one_art in dobreprogramy_articles:
-        art = Articles(SourceID=new_source, Title=one_art['title'], Author="sekurak.pl", Timestamp=one_art['date'],
-                       Tags=one_art['tags'], Text=one_art['text'], Link=one_art['link'], ImageLink=one_art['image_link'])
+        art = Articles(SourceID=new_source, Title=one_art['title'], author="author", Timestamp=one_art['date'],
+                       Tags=one_art['tags'], Text=one_art['text'], Link=one_art['link'])
         try:
             art.save()
         except IntegrityError as e:
