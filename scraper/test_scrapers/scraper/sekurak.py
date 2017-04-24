@@ -39,7 +39,7 @@ def sekurak_date2_python_date(date):
     together = day + " " + month + " " + year + " " + hours + ":" + minutes
     try:
         datetime_object = datetime.strptime(together, '%d %m %Y %H:%M')
-    except:
+    except ValueError:
         datetime_object = "ERROR"
     return datetime_object
 

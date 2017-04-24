@@ -91,9 +91,43 @@
 	\section{Opis i uzasadnienie wyboru tematu}
 	Celem projektu jest zbudowanie platformy do zbierania i prezentowania danych z różnych stron internetowych. Platforma składa się z serwisu internetowego prezentującego dane użytkownikom zalogowanym oraz z aplikacji zbierających te dane.
 	
-	Informacje są zbierane przez tzw. scrapery, a następnie, bez filtrowania, zapisywane w bazie danych. Filtrowanie odbywa się na poziomie aplikacji internetowej w oparciu o profil użytkownika. Dane zapisywane w bazie usuwane są po ustalonym czasie. Dlatego aplikacja umożliwia filtrowanie wstecz, ale tylko do pewnej granicy. Dane zapisane w bazie można określić jako 'newsy'. Jeżeli informacja zostaje usunięta to znaczy, że jest już nieaktualna. Dzięki takiemu systemowi gromadzenia danych, aplikacja jest w stanie serwować użytkownikom najnowsze materiały, przy jednoczesnym zachowaniu wydajności filtrowania różnych źródeł. Z założenia użytkownik regularnie korzysta z aplikacji.
+	Na potrzeby tego projektu i dokumentacji utworzone zostało pojęcie 'scrapowanie', które oznaczać będzie zbieranie danych ze stron internetowych poprzez odwiedzenie jej i zapisanie wybranych informacji do bazy danych.
 	
-	Temat wybraliśmy, ponieważ interesuje nas dziedzina przetwarzania danych. Chcielibyśmy poznać technologie scrapingu, parsowania stron internetowych oraz język Python, framework Django i technologie front-endowe tj. HTML5, Javascript. Jednocześnie nie znaleźliśmy zadowalającego nas serwisu, który udostępniałby takie usługi, dlatego sami zdecydowaliśmy zrobić swój.
+	\subsection{Ogólny proces zbierania i przetwarzania danych}
+	Informacje zbierane są przez tzw. scrapery, a następnie zapisywane w bazie danych. Scraper zbiera tylko te dane, które zostaną ustalone przez programistę. Dalsze filtrowanie odbywa się na poziomie aplikacji internetowej w oparciu o profil użytkownika lub podane parametry. Wyszukiwanie wykonywane jest w bazie danych. Dane zapisywane w bazie usuwane są po ustalonym czasie. Dlatego aplikacja umożliwia filtrowanie wstecz, ale tylko do pewnej granicy. Dane zapisane w bazie można określić jako 'newsy'. Jeżeli informacja zostaje usunięta to znaczy, że jest już nieaktualna. Dzięki takiemu systemowi gromadzenia danych, aplikacja jest w stanie serwować użytkownikom najnowsze materiały, przy jednoczesnym zachowaniu wydajności filtrowania różnych źródeł. Z założenia użytkownik regularnie korzysta z aplikacji.
+	
+	\subsection{Uzasadnienie wyboru tematu}
+	Temat wybraliśmy, ponieważ interesuje nas dziedzina przetwarzania danych. Chcielibyśmy poznać technologie scrapowania, parsowania stron internetowych oraz język Python, framework Django i technologie front-endowe tj. HTML5, Javascript. Jednocześnie nie znaleźliśmy zadowalającego nas serwisu, który udostępniałby takie usługi, dlatego sami zdecydowaliśmy zrobić swój.
+	
+	\section{Harmonogram prac}
+	\definecolor{azure3}{rgb}{0.0, 0.7, 1.0}
+	\begin{table}[H]
+		\setlength\extrarowheight{5pt}
+		\centering
+		\caption{Harmonogram prac}
+		\label{harmonogram_prac}
+		\begin{tabular}{ | C{2cm} | C{8cm} | C{6cm} | }
+			\hline
+			\rowcolor{azure3}
+			\textbf{Lp.} &	\textbf{Opis} &	\textbf{Miesiąc} \\ \hline
+
+			1.& Wybór technologii, modułów, podział pracy & Marzec \\ \hline
+
+			2.&	Wstępna dokumentacja, planowanie serwisu &	Kwiecień \\ \hline
+
+			3.&	Zapoznanie z technologią, testy bibliotek &	Kwiecień \\ \hline
+
+			4.&	Baza danych, pierwszy moduł, interfejs & Maj \\ \hline
+
+			5.&	Kolejne moduły & Maj \\ \hline
+
+			6.&	Testowanie serwisu, poprawki &	Czerwiec \\ \hline
+
+			7.&	Zakończenie prac nad serwisem &	Czerwiec \\ \hline
+
+		\end{tabular}
+	\end{table}
+	
 	\section{Podział prac pomiędzy członków zespołu}
 	\definecolor{azure}{rgb}{0.0, 0.4, 1.0}
 	\definecolor{azure2}{rgb}{0.94, 1.0, 1.0}
@@ -210,16 +244,15 @@
 		\begin{itemize}
 			\item uniwersalna technologia, która jest wspierana przez wszystkie popularne przeglądarki internetowe
 		\end{itemize}
-		\item Moduły scrapujące - \texttt{Python, biblioteka BeautifulSoup, Scrapy}
+		\item Moduły do scrapowania - \texttt{biblioteka BeautifulSoup}
 		\begin{itemize}
 			\item technologie przeznaczone do parsowania stron,
-			\item duże możliwości,
 			\item łatwa implementacja architektury modułowej
 		\end{itemize}
 		\item Baza danych - \texttt{SQLite}
 		\begin{itemize}
-			\item łatwa integracja z językiem Python,
-			\item w przyszłości prawdopodobnie zostanie zastąpiona inną
+			\item prosta integracja z językiem Python,
+			\item dobra we wstępnej fazie projektu
 		\end{itemize}
 	\end{itemize}
 	\section{Architektura rozwiązania}
@@ -235,19 +268,19 @@
 		\caption{Opis bazy danych}
 		\label{opis_bazy_danych}
 		\endfirsthead % musi byc
-		\multicolumn{2}{c}%
-		{\tablename\ \thetable\ -- \textit{Kontynuacja}}\hfill \\
-		\hline
-		\textbf{Tabela} & \textbf{Opis} \\
+		\multicolumn{2}{l}%
+		{\tablename\ \thetable\ -- \textit{Kontynuacja}}\hfill  \\
 		\hline
 		\rowcolor{azure3}
+		\textbf{Tabela} & \textbf{Opis} \\
+		\hline
 		\endhead
 		\hline
 		\rowcolor{azure3}
 		\textbf{Tabela} & \textbf{Opis} \\
 		\hline	
 		Articles &
-		Zawiera wszystkie sparsowane strony. (teraz kwestia ile je tam trzymać??) \\ 
+		Zawiera wszystkie sparsowane strony. \\ 
 		\hline
 		Tags &
 		Zawiera wszystkie dostępne tagi. Dodanie nowego taga odbywa się automatycznie, gdy scraper podczas parsowania wykryje, że danego taga jeszcze nie ma w bazie. \\
@@ -257,9 +290,6 @@
 		\hline
 		Sources &
 		Zawiera wszystkie dostępne źródła, czyli strony internetowe, z których zbieramy dane. Dodanie odbywa się ręcznie. Administrator musi napisać moduł dla danej strony. \\
-		\hline
-		ArticleSourceMap &
-		Łączy daną stronę z odpowiednią stroną z której pochodzi. \\
 		\hline
 		Users &
 		Zawiera wszystkich użytkowników serwisu. \\
@@ -272,9 +302,11 @@
 		\hline
 	\end{longtable}
 	\section{Interesujące problemy i ich rozwiązania}
+		\subsection{Moduł scrapujący sekurak.pl}
+			Serwis sekurak.pl zawiera dwa rodzaje artykułów, które pobieramy. Pierwszy rodzaj znajduje się w kategorii "teksty", a drugi "w biegu". Scraper został podzielony na dwa wątki, każdy dla jednej z tych kategorii. To spowodowało przyspieszenie procesu zbierania o około 50\%. Algorytm sekwencyjny dla jednej strony artykułów wykonywał się około 24 s. Algorytm wielowątkowy około 14 s.
+	
 	
 	\section{Opis stron internetowych, z których zbierane są informacje}
-	\renewcommand\thesubsection{}
 		\subsection{sekurak.pl}
 		\begin{table}[H]
 			\centering
