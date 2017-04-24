@@ -53,6 +53,7 @@ class ArticleTagMap(models.Model):
 class SourceProfile(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
     sourceID = models.ForeignKey(Sources, on_delete=models.CASCADE)
+    profileNumber = models.SmallIntegerField()
 
     class Meta:
         verbose_name_plural = "użytkownicy-źródła"
