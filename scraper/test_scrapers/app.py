@@ -8,7 +8,28 @@ application = get_wsgi_application()
 # Your application specific imports
 from django.db import IntegrityError
 from data.models import *
-from scraper import sekurak
+from scraper import sekurak, dobreprogramy
+
+
+def dobreprogramy_scraper():
+    # dodanie nowego zrodla do bazy danych
+    new_source = Sources(Name="dobreprogramy.pl")
+    try:
+        new_source.save()
+    except IntegrityError as e:
+        # zrodlo istnieje, wiec je wyszukaj
+        new_source = Sources.objects.filter(Name="dobreprogramy.pl")
+
+    dobreprogramy_articles = dobreprogramy.scrapshot()
+    for one_art in dobreprogramy_articles:
+        art = Articles(SourceID=new_source, Title=one_art['title'], Author="sekurak.pl", Timestamp=one_art['date'],
+                       Tags=one_art['tags'], Text=one_art['text'], Link=one_art['link'], ImageLink=one_art['image_link'])
+        try:
+            art.save()
+        except IntegrityError as e:
+            pass  # TODO obsluga bledow UNIQUE - tzn. juz taki artykul jest
+            #if 'UNIQUE constraint failed' in str(e):
+            #    print("bee")
 
 
 def sekurak_scraper():
