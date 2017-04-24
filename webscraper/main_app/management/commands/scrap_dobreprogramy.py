@@ -2,11 +2,11 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.db import IntegrityError
 from main_app.models import *
-from main_app.scrapers import sekurak
+from main_app.scrapers import dobreprogramy
 import threading
 
 class Command(BaseCommand):
-    help = 'Scrap sekurak.pl'
+    help = 'Scrap dobreprogramy.pl'
 
     def add_arguments(self, parser):
         parser.add_argument('pages', nargs=1, type=int, choices=range(1, 30), help='How many pages will be scraped')
@@ -15,29 +15,29 @@ class Command(BaseCommand):
         pages = options['pages'][0]
 
         # create new Source or find exist Source
-        new_source = Sources(name="sekurak.pl")
+        new_source = Sources(name="dobreprogramy.pl")
         try:
             new_source.save()
         except IntegrityError:
             # Source exists, so find it
-            new_source = Sources.objects.get(name="sekurak.pl")
+            new_source = Sources.objects.get(name="dobreprogramy.pl")
 
         # run thread for scraper
-        start = threading.Thread(target=sekurak.scrapshot, args=(pages,))
+        start = threading.Thread(target=dobreprogramy.scrapshot, args=(pages,))
         start.start()
 
         # while queue has item or while END flag is set to False
-        while not sekurak.ARTICLES.empty() or not sekurak.END:
-            one_art = sekurak.ARTICLES.get()
-
+        while not dobreprogramy.ARTICLES.empty() or not dobreprogramy.END:
+            one_art = dobreprogramy.ARTICLES.get()
+            
             # if articles has no tags then skip
             if one_art['tags'] == "":
                 continue
 
             # add Article
-            art = Articles(sourceID=new_source, title=one_art['title'], author="sekurak.pl", timestamp=one_art['date'],
+            art = Articles(sourceID=new_source, title=one_art['title'], author=one_art['author'], timestamp=one_art['date'],
                            tags=one_art['tags'], text=one_art['text'], link=one_art['link'],
-                           imageLink=one_art['image_link'])
+                           imageLink=one_art['imageLink'])
             try:
                 art.save()
             except IntegrityError:

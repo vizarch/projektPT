@@ -1,5 +1,33 @@
 {% extends 'main_app/base.html' %}
 
 {% block board %}
-    wyszukiwarka z wszystkimi funkcjami + wyswietlanie znalezionych danych
+    <form name = "form" action = "#" method = "POST">
+        {% csrf_token %}
+        Tags:
+        <input type="search" name="search">
+        <br/>
+        <select name="sources">
+            {% for source in sources %}
+            <option value="{{ source.id }}">{{ source.name }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        <select name="sources">
+            {% for source in sources %}
+            <option value="{{ source.id }}">{{ source.name }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        <select name="sources">
+            {% for source in sources %}
+            <option value="{{ source.id }}">{{ source.name }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        <input type="date" name="from">
+        <br/>
+        <input type="date" name="to">
+        <br/><br/>
+        <input type="submit" value="Szukaj">
+    </form>
 {% endblock %}

@@ -16,7 +16,14 @@ def sources_and_tags(request):
 
 @login_required
 def board(request):
-    return render(request, 'main_app/Board.html')
+    sources = Sources.objects.all()
+    tags = Tags.objects.all()
+
+    data = {
+        "sources": sources,
+        "tags": tags
+    }
+    return render(request, 'main_app/Board.html', data)
 
 @login_required
 def profile(request):
