@@ -7,8 +7,8 @@ def start_page(request):
         return render(request, 'main_app/Home.html')
 
 def sources_and_tags(request):
-    all_sources = Sources.objects.all()
-    all_tags = Tags.objects.all()
+    all_sources = Sources.objects.order_by('name')
+    all_tags = Tags.objects.order_by('name')
     data = {
         "sources": all_sources,
         "tags": all_tags
@@ -36,10 +36,9 @@ def board(request):
         found_articles = Articles.objects\
                     .filter(Q(sourceID=source1_db) | Q(sourceID=source2_db))\
                     .filter(Q(articletagmap__tagID=tag1_db)
-                            & Q(articletagmap__tagID=tag2_db)
-                            & Q(articletagmap__tagID=tag3_db))\
+                            | Q(articletagmap__tagID=tag2_db)
+                            | Q(articletagmap__tagID=tag3_db))\
                     .distinct()
-        print(found_articles)
 
         sources = Sources.objects.order_by('name')
         tags = Tags.objects.order_by('name')

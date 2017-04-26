@@ -58,8 +58,8 @@ def main_articles(pages):
                     imagelink = image[0].attrs['src']
                 except IndexError:
                     # I don't know why sometimes scraper can't find this img
-                    imagelink = ''
-                    print(link)
+                    imagelink = "https://static.dpcdn.pl/res/default.jpg"
+                    #print("\t" + link)
 
                 one_article = {"title": title, "date": date, "author": author, "link": link,
                                "tags": tags, "text": text, "imageLink": imagelink}

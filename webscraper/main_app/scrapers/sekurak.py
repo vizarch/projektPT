@@ -91,7 +91,7 @@ def w_biegu_articles(pages):
             tmp = requests.get(link)
             soup2 = BeautifulSoup(tmp.text,'lxml')
             tags = ','.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
-            image_link = ""  # w biegu nie maja obrazka
+            image_link = "http://www.securitum.pl/logo_sekurak.png"  # w biegu nie maja obrazka
             text = i.p.text
             one_article = {"title": title, "date": date, "link": link,"tags":tags, "image_link": image_link, "text":text}
             ARTICLES.put(one_article)

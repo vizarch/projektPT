@@ -51,7 +51,9 @@
     <br/>
     <hr style="height:1px;border:none;color:#333;background-color:#333;" />
     {% for article in articles %}
+        Id dla sprawdzenia: {{ article.id }}<br/>
         Link: {{ article.link }}<br/>
+        <img src="{{ article.imageLink }}" alt="{{ article.sourceID }}" height="100" width="100"><br/>
         Źródło: {{ article.sourceID }}<br/>
         Autor: {{ article.author }}<br/>
         Data: {{ article.timestamp }}<br/>

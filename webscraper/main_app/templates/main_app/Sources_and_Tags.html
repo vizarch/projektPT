@@ -3,12 +3,12 @@
 {% block sources_and_tags %}
     <h3>Źródła</h3>
     {% for source in sources %}
-        {{ source }}<br/>
+        {{ source }}, ilość artykułów: {{ source.articles_set.count }}<br/>
     {% endfor %}
     <br/>
     <h3>Tagi</h3>
     {% for tag in tags %}
-        {{ tag }},
+        {{ tag }} ({{ tag.articletagmap_set.count }}),
     {% endfor %}
 
 {% endblock %}
