@@ -1,33 +1,64 @@
 {% extends 'main_app/base.html' %}
 
 {% block board %}
-    <form name = "form" action = "#" method = "POST">
+    <form name = "form" action = "{% url 'main_app:board' %}" method = "POST">
         {% csrf_token %}
-        Tags:
-        <input type="search" name="search">
+        Tag 1:
+        <select name="tag1">
+            {% for tag in tags %}
+            <option value="{{ tag.id }}">{{ tag.name }}</option>
+            {% endfor %}
+        </select>
         <br/>
-        <select name="sources">
+        Tag 2:
+        <select name="tag2">
+            {% for tag in tags %}
+            <option value="{{ tag.id }}">{{ tag.name }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        Tag 3:
+        <select name="tag3">
+            {% for tag in tags %}
+            <option value="{{ tag.id }}">{{ tag.name }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        <br/>
+        Źródło 1:
+        <select name="source1">
             {% for source in sources %}
             <option value="{{ source.id }}">{{ source.name }}</option>
             {% endfor %}
         </select>
         <br/>
-        <select name="sources">
+        Źródło 2:
+        <select name="source2">
             {% for source in sources %}
             <option value="{{ source.id }}">{{ source.name }}</option>
             {% endfor %}
         </select>
         <br/>
-        <select name="sources">
-            {% for source in sources %}
-            <option value="{{ source.id }}">{{ source.name }}</option>
-            {% endfor %}
-        </select>
         <br/>
+        Data od:
         <input type="date" name="from">
         <br/>
+        Data do:
         <input type="date" name="to">
         <br/><br/>
         <input type="submit" value="Szukaj">
     </form>
+    <br/>
+    <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+    {% for article in articles %}
+        Link: {{ article.link }}<br/>
+        Źródło: {{ article.sourceID }}<br/>
+        Autor: {{ article.author }}<br/>
+        Data: {{ article.timestamp }}<br/>
+        Tytuł: {{ article.title }} <br/>
+        Tagi: {{ article.tags }}<br/>
+        Tekst:<br/> {{ article.text }}<br/>
+        <br/>
+        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+    {% endfor %}
 {% endblock %}

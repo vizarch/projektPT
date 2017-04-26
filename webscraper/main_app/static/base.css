@@ -1,7 +1,7 @@
 body{
     background-color:#071525;
-    overflow:hidden;
-    background: -webkit-radial-gradient(bottom right, #340c71, #071525);
+    /*overflow:hidden;*/
+    /*background: -webkit-radial-gradient(bottom right, #340c71, #071525);*/
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -11,7 +11,7 @@ body, html {
     height: 100%;
     width: 100%;
     padding: 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
     text-align: center;
 }
 svg{
