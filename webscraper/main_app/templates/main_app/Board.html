@@ -1,24 +1,29 @@
 {% extends 'main_app/base.html' %}
 
 {% block board %}
+
+<div class=my_form_bg>
+  a
+</div>
+  <div class=my_form>
     <form name = "form" action = "{% url 'main_app:board' %}" method = "POST">
         {% csrf_token %}
         Tag 1:
-        <select name="tag1">
+        <select name="tag1" class="select">
             {% for tag in tags %}
             <option value="{{ tag.id }}">{{ tag.name }}</option>
             {% endfor %}
         </select>
         <br/>
         Tag 2:
-        <select name="tag2">
+        <select name="tag2" class="select">
             {% for tag in tags %}
             <option value="{{ tag.id }}">{{ tag.name }}</option>
             {% endfor %}
         </select>
         <br/>
         Tag 3:
-        <select name="tag3">
+        <select name="tag3" class="select">
             {% for tag in tags %}
             <option value="{{ tag.id }}">{{ tag.name }}</option>
             {% endfor %}
@@ -26,14 +31,14 @@
         <br/>
         <br/>
         Źródło 1:
-        <select name="source1">
+        <select name="source1" class="select">
             {% for source in sources %}
             <option value="{{ source.id }}">{{ source.name }}</option>
             {% endfor %}
         </select>
         <br/>
         Źródło 2:
-        <select name="source2">
+        <select name="source2" class="select">
             {% for source in sources %}
             <option value="{{ source.id }}">{{ source.name }}</option>
             {% endfor %}
@@ -46,21 +51,30 @@
         Data do:
         <input type="date" name="to">
         <br/><br/>
-        <input type="submit" value="Szukaj">
-    </form>
+        <button type="submit" class="btn btn-default" value="Szukaj" class="form login">Szukaj</button>
     <br/>
-    <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+
+</div>
+
     {% for article in articles %}
-        Id dla sprawdzenia: {{ article.id }}<br/>
-        Link: {{ article.link }}<br/>
-        <img src="{{ article.imageLink }}" alt="{{ article.sourceID }}" height="100" width="100"><br/>
-        Źródło: {{ article.sourceID }}<br/>
-        Autor: {{ article.author }}<br/>
-        Data: {{ article.timestamp }}<br/>
-        Tytuł: {{ article.title }} <br/>
-        Tagi: {{ article.tags }}<br/>
-        Tekst:<br/> {{ article.text }}<br/>
-        <br/>
-        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+    <div class="article">
+        <div class = "w3-container w3-red">
+        <h2>{{ article.title }}</h2> <br/>
+        </div>
+        <div class="text_bg">
+        <div class = "w3-container w3-text">
+          <!--<img src="{{ article.imageLink }}" alt="{{ article.sourceID }}" height="100" width="100"><br/>-->
+          <p><br/> {{ article.text }}<br/></p>
+          <div class="w3-container w3-tiny">
+          <p>{{ article.tags }}<p>
+          </div>
+        </div>
+      </div>
+        <div class="w3-container w3-red">
+          <h6><b>Link:</b> <a href>{{ article.link }}<br/></a></h6>
+          <h6><b>Źródło:</b> {{ article.sourceID }} <b>Autor:</b> {{ article.author }} <b>Data:</b> {{ article.timestamp }}</h6>
+        </div>
+    </div>
+    </div>
     {% endfor %}
 {% endblock %}

@@ -1,14 +1,18 @@
 {% extends 'main_app/base.html' %}
 
 {% block sources_and_tags %}
-    <h3>Źródła</h3>
-    {% for source in sources %}
-        {{ source }}, ilość artykułów: {{ source.articles_set.count }}<br/>
-    {% endfor %}
-    <br/>
-    <h3>Tagi</h3>
-    {% for tag in tags %}
-        {{ tag }} ({{ tag.articletagmap_set.count }}),
-    {% endfor %}
+<div class="container-2">
+  <h3>Źródła</h3>
+  {% for source in sources %}
+      {{ source }}, ilość artykułów: {{ source.articles_set.count }}<br/>
+  {% endfor %}
+  <br/>
+
+  <h3>Tagi</h3>
+        {% for tag in tags %}
+            {{ tag }} ({{ tag.articletagmap_set.count }}),
+        {% endfor %}
+</div>
+
 
 {% endblock %}
