@@ -1,18 +1,59 @@
 {% extends 'main_app/base.html' %}
 
 {% block sources_and_tags %}
-<div class="container-2">
-  <h3>Źródła</h3>
-  {% for source in sources %}
-      {{ source }}, ilość artykułów: {{ source.articles_set.count }}<br/>
-  {% endfor %}
-  <br/>
+<div class="wrapper">
+  <div class="main-panel">
+    <nav class="navbar navbar-default navbar-fixed">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">Źródła | #Tagi</a>
+        </div>
+      </div>
+    </nav>
 
-  <h3>Tagi</h3>
-        {% for tag in tags %}
-            {{ tag }} ({{ tag.articletagmap_set.count }}),
-        {% endfor %}
-</div>
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="card">
+              <div class="header">
+                <h4 class="title">Źródła</h4>
+                <p class="category">Lorem Ipsum</p>
+              </div>
+              <div class="content">
+                {% for source in sources %}
+                    {{ source }}, ilość artykułów: {{ source.articles_set.count }}<br/>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="card">
+              <div class="header">
+                <h4 class="title">Tagi</h4>
+                <p class="category">Lorem Ipsum</p>
+              </div>
+              <div class="content">
+                {% for tag in tags %}
+                    {{ tag }} ({{ tag.articletagmap_set.count }}),
+                {% endfor %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
 
 
 {% endblock %}
