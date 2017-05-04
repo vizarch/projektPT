@@ -65,7 +65,7 @@ def main_articles(pages):
 
             tmp = requests.get(link)  # have to open page for scrap all tags
             soup2 = BeautifulSoup(tmp.text,'lxml')
-            tags = ','.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
+            tags = ', '.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
             image_link = i.find('div',class_='entry excerpt').img['src']
             text = i.p.text
             one_article = {"title": title, "date": date, "link": link,"tags":tags, "image_link": image_link, "text":text}

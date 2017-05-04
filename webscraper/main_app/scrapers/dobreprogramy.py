@@ -49,7 +49,7 @@ def main_articles(pages):
                 soup1 = BeautifulSoup(page1.content, 'lxml')
 
                 artykul = soup1.find(class_='tags font-heading-master')
-                tags = ','.join([i.text for i in artykul.find_all('a')])
+                tags = ', '.join([i.text for i in artykul.find_all('a')])
 
                 page2 = requests.get("https://www.dobreprogramy.pl/"+author)
                 soup2 = BeautifulSoup(page2.content, 'lxml')
