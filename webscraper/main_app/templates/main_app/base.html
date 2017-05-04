@@ -25,6 +25,11 @@
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="{% url 'main_app:start_page' %}">Web Scraper</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
@@ -43,6 +48,11 @@
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="{% url 'main_app:start_page' %}">Web Scraper</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
@@ -50,17 +60,9 @@
                                 <li><a href="{% url 'main_app:board' %}">Tablica</a></li>
                                 <li><a href="{% url 'main_app:profile' %}">Profil</a></li>
                                 <li><a href="{% url 'main_app:sources_and_tags' %}">Źródła i tagi</a></li>
-                                <li id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                                    </a>
-                                </li>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="{% url 'user_account:user_profile' %}">{{ user }}</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="{% url 'user_account:logout_view' %}">Wyloguj</a></li>
-                                    </ul>
+                                <li><a href="{% url 'user_account:user_profile' %}">Ustawienia</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'user_account:logout_view' %}">Wyloguj</a></li>
                         </ul>
                 </div>
             </div>
