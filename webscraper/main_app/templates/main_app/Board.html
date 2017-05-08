@@ -2,103 +2,109 @@
 
 {% block board %}
 
-<div class="wrapper">
-  <div class="main-panel">
-    <nav class="navbar navbar-default navbar-fixed">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">Dashboard</a>
+    <div class="wrapper">
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand">Dashboard</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-      </div>
-    </nav>
 
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
 
-          <div class="col-md-12">
-            <div class="card">
-              <div class="header">
-                <h4 class="title">Lorem Ipsum</h4>
-                <p class="category">Lorem Ipsum</p>
-              </div>
-              <div class="content">
-                <form name = "form" action = "{% url 'main_app:board' %}" method = "POST">
-                  {% csrf_token %}
-                  Tag 1:
-                  <select name="tag1" class="select">
-                    {% for tag in tags %}
-                    <option value="{{ tag.id }}">{{ tag.name }}</option>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Lorem Ipsum</h4>
+                                <p class="category">Lorem Ipsum</p>
+                            </div>
+                            <div class="content">
+                                <form name="form" action="{% url 'main_app:board' %}" method="POST">
+                                    {% csrf_token %}
+                                    Tag 1:
+                                    <select name="tag1" class="select">
+                                        {% for tag in tags %}
+                                            <option value="{{ tag.id }}">{{ tag.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br/>
+                                    <br/>
+                                    Tag 2:
+                                    <select name="tag2" class="select">
+                                        {% for tag in tags %}
+                                            <option value="{{ tag.id }}">{{ tag.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br/>
+                                    <br/>
+                                    Tag 3:
+                                    <select name="tag3" class="select">
+                                        {% for tag in tags %}
+                                            <option value="{{ tag.id }}">{{ tag.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br/>
+                                    <br/>
+                                    Źródło 1:
+                                    <select name="source1" class="select">
+                                        {% for source in sources %}
+                                            <option value="{{ source.id }}">{{ source.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br/>
+                                    <br/>
+                                    Źródło 2:
+                                    <select name="source2" class="select">
+                                        {% for source in sources %}
+                                            <option value="{{ source.id }}">{{ source.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br/>
+                                    <br/>
+                                    Data od:
+                                    <input type="date" name="from">
+                                    <br/>
+                                    <br/>
+                                    Data do:
+                                    <input type="date" name="to">
+                                    <br/><br/>
+                                    <button type="submit" class="btn btn-default" value="Szukaj" class="form login">
+                                        Szukaj
+                                    </button>
+                                    <br/>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for article in articles %}
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    </br>
+                                    <h3 class="title">{{ article.title }}</h3>
+                                    <p class="category"><a href="{{ article.link }}">{{ article.link }}</a></p>
+                                    <hr>
+                                </div>
+                                <div class="content">
+                                    <!--<img src="{{ article.imageLink }}" alt="{{ article.sourceID }}" height="100" width="100">-->
+                                    <p>{{ article.text }}</p>
+                                    <hr>
+                                    <p><b>Tagi:</b> {{ article.tags }}<p>
+                                    <p><b>Źródło:</b> {{ article.sourceID }} <b>Autor:</b> {{ article.author }}
+                                        <b>Data:</b> {{ article.timestamp }}</p>
+                                </div>
+                            </div>
+                        </div>
                     {% endfor %}
-                  </select>
-                  <br/>
-                  <br/>
-                  Tag 2:
-                  <select name="tag2" class="select">
-                    {% for tag in tags %}
-                    <option value="{{ tag.id }}">{{ tag.name }}</option>
-                    {% endfor %}
-                  </select>
-                  <br/>
-                  <br/>
-                  Tag 3:
-                  <select name="tag3" class="select">
-                    {% for tag in tags %}
-                    <option value="{{ tag.id }}">{{ tag.name }}</option>
-                    {% endfor %}
-                  </select>
-                  <br/>
-                  <br/>
-                  Źródło 1:
-                  <select name="source1" class="select">
-                    {% for source in sources %}
-                    <option value="{{ source.id }}">{{ source.name }}</option>
-                    {% endfor %}
-                  </select>
-                  <br/>
-                  <br/>
-                  Źródło 2:
-                  <select name="source2" class="select">
-                    {% for source in sources %}
-                    <option value="{{ source.id }}">{{ source.name }}</option>
-                    {% endfor %}
-                  </select>
-                  <br/>
-                  <br/>
-                  Data od:
-                  <input type="date" name="from">
-                  <br/>
-                  <br/>
-                  Data do:
-                  <input type="date" name="to">
-                  <br/><br/>
-                  <button type="submit" class="btn btn-default" value="Szukaj" class="form login">Szukaj</button>
-                  <br/>
-              </div>
+
+                </div>
             </div>
-          </div>
-
-          {% for article in articles %}
-          <div class="col-md-12">
-            <div class="card">
-              <div class="header">
-              </br>
-                <h3 class="title">{{ article.title }}</h3>
-                <p class="category"><a href="{{ article.link }}">{{ article.link }}</a></p>
-                <hr>
-              </div>
-              <div class="content">
-                  <!--<img src="{{ article.imageLink }}" alt="{{ article.sourceID }}" height="100" width="100">-->
-                  <p>{{ article.text }}</p>
-                  <hr>
-                  <p><b>Tagi:</b> {{ article.tags }}<p>
-                  <p><b>Źródło:</b> {{ article.sourceID }} <b>Autor:</b> {{ article.author }} <b>Data:</b> {{ article.timestamp }}</p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-
         </div>
-      </div>
     </div>
-    {% endblock %}
+
+{% endblock %}
