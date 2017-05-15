@@ -1563,8 +1563,8 @@ body > .navbar-collapse[data-color="purple"]:after {
   background-color: transparent;
 }
 .navbar-default:not(.navbar-transparent) .btn-default:hover {
-  color: #1DC7EA;
-  border-color: #1DC7EA;
+  color: #00daff;
+  border-color: #00daff;
 }
 .navbar-default:not(.navbar-transparent) .btn-neutral, .navbar-default:not(.navbar-transparent) .btn-neutral:hover, .navbar-default:not(.navbar-transparent) .btn-neutral:active {
   color: #9A9A9A;
@@ -3527,7 +3527,7 @@ body > .navbar-collapse[data-color="purple"]:after {
     left: 9px;
     top: 18px;
     border-radius: 2px;
-    background: #340c71;
+    background: #0093ff;
 }
 .search-wrapper .input-holder .search-icon span::after {
     width: 14px;
@@ -3535,7 +3535,7 @@ body > .navbar-collapse[data-color="purple"]:after {
     left: 0px;
     top: 0px;
     border-radius: 16px;
-    border: 4px solid #340c71;
+    border: 4px solid #0093ff;
 }
 .search-wrapper .close {
     position: absolute;
@@ -3739,7 +3739,7 @@ input {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #340c71;
+    background: #0093ff;
     width: 100%;
     border: 0;
     padding: 15px;
@@ -3751,7 +3751,7 @@ input {
 }
 .form button:hover,.form button:active,.form button:focus {
     color :white;
-    background: #3f0e90;
+    background: #00ffe9;
 }
 .form .message {
     margin: 15px 0 0;
@@ -4037,4 +4037,3 @@ input {
 .w3-border-white,.w3-hover-border-white:hover{border-color:#fff!important}
 .w3-border-black,.w3-hover-border-black:hover{border-color:#000!important}
 .w3-border-grey,.w3-hover-border-grey:hover,.w3-border-gray,.w3-hover-border-gray:hover{border-color:#bbb!important}
-.

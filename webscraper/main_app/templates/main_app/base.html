@@ -2,113 +2,122 @@
 
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
-    <meta name="viewport" content="width=device-width"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
 
-    <title>Web Scraper</title>
+  <title>Web Scraper</title>
 
-    <!-- bootstrap, jquery -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  {% load static %}
 
-    {% load static %}
+  <link rel="stylesheet" href="{% static 'main_app/css/base.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'main_app/css/font-awesome.min.css' %}">
+  <link href="{% static 'main_app/css/bootstrap.min.css' %}" rel="stylesheet">
+  <script src="{% static 'main_app/js/scripts.js' %}"></script>
+  <script type="text/javascript" src="{% static 'main_app/js/jquery-3.2.1.js' %}"></script>
 
-    <link rel="stylesheet" href="{% static 'main_app/css/base.css' %}" type="text/css">
-    <link href="{% static 'main_app/css/bootstrap.min.css' %}" rel="stylesheet"/>
 
-    <!-- Bootstrap core CSS  ????   -->
-    <!--<link href="assets/css/bootstrap.min.css" rel="stylesheet" />-->
+
+
+
+  <!-- bootstrap, jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Bootstrap core CSS  ????   -->
+  <!--<link href="assets/css/bootstrap.min.css" rel="stylesheet" />-->
 
 
 </head>
 
 <body>
-{% if not user.is_authenticated %}
-    <div class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg">
-        <div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="{% url 'main_app:start_page' %}" class="simple-text">
-                    Web Scraper
-                </a>
-            </div>
+  {% if not user.is_authenticated %}
+  <div class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar-wrapper">
+      <div class="logo">
+        <a href="{% url 'main_app:start_page' %}" class="simple-text">
+          Web Scraper
+        </a>
+      </div>
 
-            <ul class="nav">
-                <li>
-                    <a href="{% url 'main_app:sources_and_tags' %}">
-                        <i class="pe-7s-graph"></i>
-                        <p>Źródła | #Tagi</p>
-                    </a>
-                </li>
-                <li data-toggle="modal" data-target="#login">
-                    <a href="#">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Logowanie</p>
-                    </a>
-                </li>
-                <li data-toggle="modal" data-target="#register">
-                    <a href="#">
-                        <i class="pe-7s-bell"></i>
-                        <p>Rejestracja</p>
-                    </a>
-                </li>
-        </div>
+      <ul class="nav">
+        <li>
+          <a href="{% url 'main_app:sources_and_tags' %}">
+            <i class="fa fa-hashtag" aria-hidden="true"></i>
+            <p>Źródła | #Tagi</p>
+          </a>
+        </li>
+        <li data-toggle="modal" data-target="#login">
+          <a href="#">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            <p>Logowanie</p>
+          </a>
+        </li>
+        <li data-toggle="modal" data-target="#register">
+          <a href="#">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <p>Rejestracja</p>
+          </a>
+        </li>
+      </div>
     </div>
     {% include "user_account/login_and_register.html" %}
 
-{% else %}
+    {% else %}
 
     <div class="sidebar" data-color="azure" data-image="https://static.pexels.com/photos/40120/pexels-photo-40120.jpeg">
-        <div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="{% url 'main_app:start_page' %}" class="simple-text">
-                    Web Scraper
-                </a>
-            </div>
-
-            <ul class="nav">
-                <li>
-                    <a href="{% url 'main_app:board' %}">
-                        <i class="pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'main_app:profile' %}">
-                        <i class="pe-7s-graph"></i>
-                        <p>Profil</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'main_app:sources_and_tags' %}">
-                        <i class="pe-7s-graph"></i>
-                        <p>Źródła | #Tagi</p>
-                    </a>
-                </li>
-                <li>
-                    <a href={% url 'user_account:user_profile' %}>
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Ustawienia</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'user_account:logout_view' %}">
-                        <i class="pe-7s-bell"></i>
-                        <p>Wyloguj</p>
-                    </a>
-                </li>
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="{% url 'main_app:start_page' %}" class="simple-text">
+            Web Scraper
+          </a>
         </div>
-    </div>
+
+        <ul class="nav">
+          <li>
+            <a href="{% url 'main_app:board' %}">
+              <i class="fa fa-square" aria-hidden="true"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'main_app:profile' %}">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <p>Profil</p>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'main_app:sources_and_tags' %}">
+              <i class="fa fa-hashtag" aria-hidden="true"></i>
+              <p>Źródła | #Tagi</p>
+            </a>
+          </li>
+          <li>
+            <a href={% url 'user_account:user_profile' %}>
+              <i class="fa fa-cogs" aria-hidden="true"></i>
+              <p>Ustawienia</p>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'user_account:logout_view' %}">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+              <p>Wyloguj</p>
+            </a>
+          </li>
+        </div>
+      </div>
 
 
-{% endif %}
+    {% endif %}
 
 
-{% block middle %} <!-- w tym bloku pojawia sie odpowiednia zawartosc, zaleznie od tego na jaka strone wchodzimy -->
-{% endblock %}
+    {% block middle %} <!-- w tym bloku pojawia sie odpowiednia zawartosc, zaleznie od tego na jaka strone wchodzimy -->
+    {% endblock %}
+
+
 
 </body>
 </html>
