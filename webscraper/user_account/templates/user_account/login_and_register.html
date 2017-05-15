@@ -2,47 +2,45 @@
 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="login-page">
-                <div class="form">
-
-                    <form class="login-form" action="{% url 'user_account:login_view' %}" method="post">
-                        {% csrf_token %}
-                        <form action="/" method="post" class="form login">
-
-                            <header class="login__header">
-                                <h1 class="login__title">Logowanie</h1>
-                            </header>
-                            <hr>
-                            <input type="text" class="form-control" name="username" placeholder="Login">
-                            <input type="password" class="form-control" name="password" placeholder="Hasło">
-                        <button type="submit" class="btn btn-default" value="Login" class="form login">Zaloguj</button>
-
-                            <p class="message" >Nie masz konta? <a href="#register" data-toggle="modal" data-target="#register" >Zarejestruj się!</a></p>
-                    </form>
-                </div>
+            <div class="form">
+                <form class="login-form" action="{% url 'user_account:login_view' %}" method="post">
+                    {% csrf_token %}
+                    <header class="login__header">
+                        <h1 class="login__title">Logowanie</h1>
+                    </header>
+                    <hr>
+                    <input type="text" class="form-control" name="username" placeholder="Login" required>
+                    <input type="password" class="form-control" name="password" placeholder="Hasło" required>
+                    <button type="submit" class="btn btn-default" value="Login" class="form login">Zaloguj</button>
+                    <p class="message">Nie masz konta? <a href="#register" data-toggle="modal"
+                                                          data-target="#register">Zarejestruj się!</a></p>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- REGISTRATION MODAL -->
-    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="login-page">
-                <div class="form">
-                    <form class="form-signin" action="{% url 'user_account:register_view' %}" method="post">
-                        {% csrf_token %}
-                            <header class="login__header">
-                                <h1 class="login__title">Rejestracja</h1>
-                            </header>
-                            <hr>
-                            <input type="text" class="form-control" name="username" placeholder="Login">
-                            <input type="email" class="form-control" name="email" placeholder="Email">
-                            <input type="password" class="form-control" name="password" placeholder="Hasło">
-                            <button type="submit" class="btn btn-default" value="Login" class="form login">Zarejestruj</button>
-                            <p class="message" >Masz już konto? <a href="#login" data-toggle="modal" data-target="#login" >Zaloguj się!</a></p>
-                        </form>
-                </div>
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="login-page">
+            <div class="form">
+                <form class="form-signin" action="{% url 'user_account:register_view' %}" method="post">
+                    {% csrf_token %}
+                    <header class="login__header">
+                        <h1 class="login__title">Rejestracja</h1>
+                    </header>
+                    <hr>
+                    <input type="text" class="form-control" name="username" placeholder="Login" required>
+                    <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    <input type="password" class="form-control" name="password" placeholder="Hasło" required>
+                    <button type="submit" class="btn btn-default" value="Login" class="form login">Zarejestruj</button>
+                    <p class="message">Masz już konto? <a href="#login" data-toggle="modal" data-target="#login">Zaloguj
+                        się!</a></p>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
