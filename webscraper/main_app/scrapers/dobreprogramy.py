@@ -22,7 +22,7 @@ def dobreprogramy_date2_python_date(date):
         datetime_object = datetime.strptime(together, '%d %m %Y %H:%M')
         datetime_object = datetime_object.replace(tzinfo=timezone('Europe/Warsaw'))
     except ValueError:
-        datetime_object = ""
+        raise
     return datetime_object
 
 def main_articles(pages):
@@ -38,28 +38,31 @@ def main_articles(pages):
             if i.header is None:
                 continue
             else:
-                title = i.header.h1.a.text
-                author = i.find(class_="content-info").find('a', rel='author').text
-                link = i.header.h1.a['href']
-                date = i.find(class_="content-info").time.text
-                date = dobreprogramy_date2_python_date(date)
-                text = i.find(class_="entry-content").text
-
-                page1 = requests.get(link)  # have to open page for scrap all tags
-                soup1 = BeautifulSoup(page1.content, 'lxml')
-
-                artykul = soup1.find(class_='tags font-heading-master')
-                tags = ', '.join([i.text for i in artykul.find_all('a')])
-
-                page2 = requests.get("https://www.dobreprogramy.pl/"+author)
-                soup2 = BeautifulSoup(page2.content, 'lxml')
-                image = soup2.find_all("img", alt="avatar")
                 try:
+                    title = i.header.h1.a.text
+                    link = i.header.h1.a['href']
+                    date = i.find(class_="content-info").time.text
+                    date = dobreprogramy_date2_python_date(date)
+                    text = i.find(class_="entry-content").text
+                    page1 = requests.get(link)  # have to open page for scrap all tags
+                    soup1 = BeautifulSoup(page1.content, 'lxml')
+
+                    artykul = soup1.find(class_='tags font-heading-master')
+                    tags = ', '.join([i.text for i in artykul.find_all('a')])
+                except:
+                    print("Error: ", title, link, date, text, tags)
+                    continue
+
+                author = i.find(class_="content-info").find('a', rel='author').text
+                
+                try:
+                    page2 = requests.get("https://www.dobreprogramy.pl/"+author)
+                    soup2 = BeautifulSoup(page2.content, 'lxml')
+                    image = soup2.find_all("img", alt="avatar")
                     imagelink = image[0].attrs['src']
                 except IndexError:
                     # I don't know why sometimes scraper can't find this img
                     imagelink = "https://static.dpcdn.pl/res/default.jpg"
-                    #print("\t" + link)
 
                 one_article = {"title": title, "date": date, "author": author, "link": link,
                                "tags": tags, "text": text, "imageLink": imagelink}

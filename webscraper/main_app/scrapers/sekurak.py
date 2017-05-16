@@ -42,7 +42,7 @@ def sekurak_date2_python_date(date):
         datetime_object = datetime.strptime(together, '%d %m %Y %H:%M')
         datetime_object = datetime_object.replace(tzinfo=timezone('Europe/Warsaw'))
     except ValueError:
-        datetime_object = ""
+        raise
     return datetime_object
 
 
@@ -58,16 +58,24 @@ def main_articles(pages):
         #  main page articles
         print("MAIN: " + str(webpage.url))
         for i in sekurak:
-            title = i.find(class_="postTitle").text
-            date = ' '.join(i.find('div',class_='meta').text.split()[0:4])
-            date = sekurak_date2_python_date(date)
-            link = i.find(class_="postTitle").a['href']
+            try:
+                title = i.find(class_="postTitle").text
+                date = ' '.join(i.find('div',class_='meta').text.split()[0:4])
+                date = sekurak_date2_python_date(date)
+                link = i.find(class_="postTitle").a['href']
 
-            tmp = requests.get(link)  # have to open page for scrap all tags
-            soup2 = BeautifulSoup(tmp.text,'lxml')
-            tags = ', '.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
-            image_link = i.find('div',class_='entry excerpt').img['src']
-            text = i.p.text
+                tmp = requests.get(link)  # have to open page for scrap all tags
+                soup2 = BeautifulSoup(tmp.text,'lxml')
+                tags = ', '.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
+                text = i.p.text
+            except:
+                print("Error: ", title, date, link, tags, text)
+                continue
+            try:
+                image_link = i.find('div',class_='entry excerpt').img['src']
+            except:
+                image_link = "http://www.securitum.pl/logo_sekurak.png"
+
             one_article = {"title": title, "date": date, "link": link,"tags":tags, "image_link": image_link, "text":text}
             ARTICLES.put(one_article)
 
@@ -83,16 +91,21 @@ def w_biegu_articles(pages):
         # w biegu
         print("W BIEGU: " + str(webpage.url))
         for i in sekurak:
-            title = i.find(class_="postTitle").text
-            date = ' '.join(i.find('div', class_='meta').text.split()[0:4])
-            date = sekurak_date2_python_date(date)
-            link = i.find(class_="postTitle").a['href']
+            try:
+                title = i.find(class_="postTitle").text
+                date = ' '.join(i.find('div', class_='meta').text.split()[0:4])
+                date = sekurak_date2_python_date(date)
+                link = i.find(class_="postTitle").a['href']
 
-            tmp = requests.get(link)
-            soup2 = BeautifulSoup(tmp.text,'lxml')
-            tags = ','.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
+                tmp = requests.get(link)
+                soup2 = BeautifulSoup(tmp.text,'lxml')
+                tags = ','.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
+                text = i.p.text
+            except:
+                print("Error: ", title, date, link, tags, text)
+                continue
+            
             image_link = "http://www.securitum.pl/logo_sekurak.png"  # w biegu nie maja obrazka
-            text = i.p.text
             one_article = {"title": title, "date": date, "link": link,"tags":tags, "image_link": image_link, "text":text}
             ARTICLES.put(one_article)
 

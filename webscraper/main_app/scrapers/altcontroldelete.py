@@ -72,7 +72,7 @@ def main_articles(pages):
 				imageLink = i.find(class_="article-header-1d").a.img['src']
 				
 				one_article = {"title" : title, "date": date, "author" : author, "link":link,
-				"tags":tags, "text":text, "imageLink": imageLink}
+				"tags":tags, "text":text, "image_link": imageLink}
 				
 				ARTICLES.put(one_article)
 				
