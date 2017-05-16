@@ -13,18 +13,18 @@ END = False
 def month2int(month):
     month = month.lower()
     months = {
-    "sty": '01',
-    "lut": '02',
-    "mar": '03',
-    "kwi": '04',
-    "maj": '05',
-    "cze": '06',
-    "lip": '07',
-    "sie": '08',
-    "wrz": '09',
-    "paź": '10',
-    "lis": '11',
-    "gru": '12'
+    "JAN": '01',
+    "FEB": '02',
+    "MAR": '03',
+    "APR": '04',
+    "MAY": '05',
+    "JUN": '06',
+    "JUL": '07',
+    "AUG": '08',
+    "SEP": '09',
+    "OCT": '10',
+    "NOV": '11',
+    "DEC": '12'
     }
     return months.get(month)
 
