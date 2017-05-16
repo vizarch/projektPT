@@ -60,7 +60,7 @@ def main_articles(pages):
         for i in sekurak:
             try:
                 title = i.find(class_="postTitle").text
-                date = ' '.join(i.find('div',class_='meta').text.split()[0:4])
+                date = ' '.join(i.find('div', class_='meta').text.split()[0:4])
                 date = sekurak_date2_python_date(date)
                 link = i.find(class_="postTitle").a['href']
 
@@ -69,7 +69,7 @@ def main_articles(pages):
                 tags = ', '.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
                 text = i.p.text
             except:
-                print("Error: ", title, date, link, tags, text)
+                print("Error MAIN")
                 continue
             try:
                 image_link = i.find('div',class_='entry excerpt').img['src']
@@ -102,7 +102,7 @@ def w_biegu_articles(pages):
                 tags = ','.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
                 text = i.p.text
             except:
-                print("Error: ", title, date, link, tags, text)
+                print("Error W BIEGU")
                 continue
             
             image_link = "http://www.securitum.pl/logo_sekurak.png"  # w biegu nie maja obrazka

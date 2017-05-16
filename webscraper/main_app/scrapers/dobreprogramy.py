@@ -50,12 +50,11 @@ def main_articles(pages):
                     artykul = soup1.find(class_='tags font-heading-master')
                     tags = ', '.join([i.text for i in artykul.find_all('a')])
                 except:
-                    print("Error: ", title, link, date, text, tags)
+                    print("Error")
                     continue
-
-                author = i.find(class_="content-info").find('a', rel='author').text
                 
                 try:
+                    author = i.find(class_="content-info").find('a', rel='author').text
                     page2 = requests.get("https://www.dobreprogramy.pl/"+author)
                     soup2 = BeautifulSoup(page2.content, 'lxml')
                     image = soup2.find_all("img", alt="avatar")
@@ -63,6 +62,8 @@ def main_articles(pages):
                 except IndexError:
                     # I don't know why sometimes scraper can't find this img
                     imagelink = "https://static.dpcdn.pl/res/default.jpg"
+                    if author is None:
+                        author = "dobreprogramy"
 
                 one_article = {"title": title, "date": date, "author": author, "link": link,
                                "tags": tags, "text": text, "imageLink": imagelink}
