@@ -1,16 +1,20 @@
 tags {
   display: block;
-  border: 1px solid #DDD;
+  border: 2px solid #DDD;
+  border-radius: 4px;
   padding-right: 0.3em 0.5em;
   cursor: text;
   overflow: hidden;
+
 }
+
 
 tags:hover {
   border-color: #CCC;
 }
 
 tags tag {
+
   display: inline-block;
   margin: 5px 0 5px 5px;
   vertical-align: top;
@@ -24,13 +28,15 @@ tags tag {
 }
 
 tags tag > div {
+  border-radius: 4px;
   vertical-align: top;
   position: relative;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   max-width: 100%;
   padding: 0.3em 0.5em;
-  color: black;
+  color: white;
+  background-color: #1dea6d;
   -webkit-transition: .13s ease-out;
   -o-transition: .13s ease-out;
   transition: .13s ease-out;
@@ -117,6 +123,7 @@ tags tag x {
   font: 14px/14px Serif;
   width: 14px;
   height: 14px;
+  color: white;
   text-align: center;
   border-radius: 50px;
   position: absolute;
