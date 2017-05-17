@@ -35,7 +35,7 @@ class Command(BaseCommand):
                 continue
 
             # add Article
-            art = Articles(sourceID=new_source, title=one_art['title'], author="sekurak.pl", timestamp=one_art['date'],
+            art = Articles(sourceID=new_source, title=one_art['title'], author=one_art['author'], timestamp=one_art['date'],
                            tags=one_art['tags'], text=one_art['text'], link=one_art['link'],
                            imageLink=one_art['image_link'])
             try:
@@ -46,6 +46,8 @@ class Command(BaseCommand):
             # add Tags
             tags = one_art['tags'].split(",")
             for tmp_tag in tags:
+                if tmp_tag[0] == " ":
+                    tmp_tag = tmp_tag[1:]
                 tag = Tags(name=str(tmp_tag))
                 try:
                     tag.save()  # add tag if it's new

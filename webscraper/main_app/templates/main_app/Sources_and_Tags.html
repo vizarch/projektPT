@@ -15,6 +15,23 @@
         <div class="container-fluid">
             <div class="row">
 
+                {% if linked_articles %}
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Powiązane artykuły</h4>
+                                <p class="category"><b>#</b>{{ chosen_tag.name }}</p>
+                            </div>
+                            <div class="content">
+                                {% for article in linked_articles %}
+                                    {{ forloop.counter }}. <a href="{{ article.link }}">{{ article.title }}</a><br/>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
@@ -37,12 +54,15 @@
                         </div>
                         <div class="content">
                             {% for tag in tags %}
-                              <b>#</b>{{ tag }} ({{ tag.articletagmap_set.count }}),
+                                <b>#</b><a href="{% url 'main_app:sources_and_tags' tag.id %}">{{ tag }}</a> (
+                                {{ tag.articletagmap_set.count }}),
                             {% endfor %}
 
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>

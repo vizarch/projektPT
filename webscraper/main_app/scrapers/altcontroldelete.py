@@ -26,7 +26,24 @@ def month2int(month):
         "lis": '11',
         "gru": '12'
     }
-    return months.get(month)
+    months_ang = {
+        "jan": '01',
+        "feb": '02',
+        "mar": '03',
+        "apr": '04',
+        "may": '05',
+        "jun": '06',
+        "jul": '07',
+        "aug": '08',
+        "sep": '09',
+        "oct": '10',
+        "nov": '11',
+        "dec": '12'
+    }
+    num = months.get(month)
+    if num is None:
+        num = months_ang.get(month)
+    return num
 
 def altcontroldelete_date2_python_date(date):
     date = date.split()
@@ -73,7 +90,7 @@ def main_articles(pages):
                     a, b = span.split("autor:")
                     author = b.strip()
                 except:
-                    author = "controlaltdelete"
+                    author = "controlaltdelete.pl"
 
                 try:
                     image_link = i.find(class_="article-header-1d").a.img['src']

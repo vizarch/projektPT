@@ -33,13 +33,9 @@ def sekurak_date2_python_date(date):
     day = date[0]
     month = month2int(date[1])
     year = date[2][0:-1]  # remove the last sign - comma
-    time_ = date[3]
-    time_ = time_.split(":")
-    hours = time_[0]
-    minutes = time_[1]
-    together = day + " " + month + " " + year + " " + hours + ":" + minutes
+    together = day + " " + month + " " + year
     try:
-        datetime_object = datetime.strptime(together, '%d %m %Y %H:%M')
+        datetime_object = datetime.strptime(together, '%d %m %Y')
         datetime_object = datetime_object.replace(tzinfo=timezone('Europe/Warsaw'))
     except ValueError:
         raise
@@ -66,7 +62,7 @@ def main_articles(pages):
 
                 tmp = requests.get(link)  # have to open page for scrap all tags
                 soup2 = BeautifulSoup(tmp.text,'lxml')
-                tags = ', '.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
+                tags = ','.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
                 text = i.p.text
             except:
                 print("Error MAIN")

@@ -14,12 +14,9 @@ def dobreprogramy_date2_python_date(date):
     month = date[1]
     date = date[2].split(" ")  # # [2017, 1:27]
     year = date[0]
-    date = date[1].split(":")
-    hours = date[0].zfill(2)
-    minutes = date[1]
-    together = day + " " + month + " " + year + " " + hours + ":" + minutes
+    together = day + " " + month + " " + year
     try:
-        datetime_object = datetime.strptime(together, '%d %m %Y %H:%M')
+        datetime_object = datetime.strptime(together, '%d %m %Y')
         datetime_object = datetime_object.replace(tzinfo=timezone('Europe/Warsaw'))
     except ValueError:
         raise
@@ -48,7 +45,7 @@ def main_articles(pages):
                     soup1 = BeautifulSoup(page1.content, 'lxml')
 
                     artykul = soup1.find(class_='tags font-heading-master')
-                    tags = ', '.join([i.text for i in artykul.find_all('a')])
+                    tags = ','.join([i.text for i in artykul.find_all('a')])
                 except:
                     print("Error")
                     continue

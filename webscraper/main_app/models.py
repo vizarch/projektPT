@@ -27,8 +27,8 @@ class Articles(models.Model):
     sourceID = models.ForeignKey(Sources, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
-    timestamp = models.DateTimeField(null=True)
-    tags = models.CharField(max_length=150)  # lista: animal,nature,forest
+    timestamp = models.DateField(null=True)
+    tags = models.CharField(max_length=150)
     text = models.TextField()
     link = models.CharField(max_length=100, unique=True)
     imageLink = models.URLField(max_length=100)

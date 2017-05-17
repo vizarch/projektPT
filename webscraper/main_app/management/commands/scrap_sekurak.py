@@ -46,6 +46,8 @@ class Command(BaseCommand):
             # add Tags
             tags = one_art['tags'].split(",")
             for tmp_tag in tags:
+                if tmp_tag[0] == " ":
+                    tmp_tag = tmp_tag[1:]
                 tag = Tags(name=str(tmp_tag))
                 try:
                     tag.save()  # add tag if it's new

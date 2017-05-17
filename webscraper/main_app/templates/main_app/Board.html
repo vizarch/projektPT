@@ -1,52 +1,16 @@
 {% extends 'main_app/base.html' %}
 
-<script type="text/javascript">
-		function onAddTag(tag) {
-			alert("Added a tag: " + tag);
-		}
-		function onRemoveTag(tag) {
-			alert("Removed a tag: " + tag);
-		}
-		function onChangeTag(input,tag) {
-			alert("Changed a tag: " + tag);
-		}
-		$(function() {
-			$('#tags_1').tagsInput({width:'auto'});
-			$('#tags_2').tagsInput({
-				width: 'auto',
-				onChange: function(elem, elem_tags)
-				{
-					var languages = ['php','ruby','javascript'];
-					$('.tag', elem_tags).each(function()
-					{
-						if($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
-							$(this).css('background-color', 'yellow');
-					});
-				}
-			});
-			$('#tags_3').tagsInput({
-				width: 'auto',
-				//autocomplete_url:'test/fake_plaintext_endpoint.html' //jquery.autocomplete (not jquery ui)
-				autocomplete_url:'test/fake_json_endpoint.html' // jquery ui autocomplete requires a json endpoint
-			});
-// Uncomment this line to see the callback functions in action
-//			$('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});
-// Uncomment this line to see an input with no interface for adding new tags.
-//			$('input.tags').tagsInput({interactive:false});
-		});
-	</script>
-
 {% block middle %}
 
     <div class="wrapper">
-        <div class="main-panel">
-            <nav class="navbar navbar-default navbar-fixed">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand">Dashboard</a>
-                    </div>
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Dashboard</a>
                 </div>
-            </nav>
+            </div>
+        </nav>
 
 
         <div class="content">
@@ -60,59 +24,16 @@
                                 <p class="category">Lorem Ipsum</p>
                             </div>
                             <div class="content">
-                              <!--<button id="about-btn"> Click Me - I'm Javascript on Speed</button>-->
-                              Wyszukiwarka:
-                              <form>
-                                <p><label>Autocomplete:</label>
-                                  <input id='tags_3' type='text' class='tags'></p>
-                                </form>
-                            <br/>
-                            <br/>
                                 <form name="form" action="{% url 'main_app:board' %}" method="POST">
                                     {% csrf_token %}
-                                    Tag 1:
-                                    <select name="tag1" class="select">
-                                        {% for tag in tags %}
-                                            <option value="{{ tag.id }}">{{ tag.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <br/>
-                                    <br/>
-                                    Tag 2:
-                                    <select name="tag2" class="select">
-                                        {% for tag in tags %}
-                                            <option value="{{ tag.id }}">{{ tag.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <br/>
-                                    <br/>
-                                    Tag 3:
-                                    <select name="tag3" class="select">
-                                        {% for tag in tags %}
-                                            <option value="{{ tag.id }}">{{ tag.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <br/>
-                                    <br/>
-                                    Źródło 1:
-                                    <select name="source1" class="select">
-                                        {% for source in sources %}
-                                            <option value="{{ source.id }}">{{ source.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <br/>
-                                    <br/>
-                                    Źródło 2:
-                                    <select name="source2" class="select">
-                                        {% for source in sources %}
-                                            <option value="{{ source.id }}">{{ source.name }}</option>
-                                        {% endfor %}
-                                    </select>
+                                    Tagi (max 7):
+                                    <input name='tags' placeholder='tagi' value=''>
+                                    Źródła ('wszystkie'):
+                                    <input name='sources' placeholder='źródła' value=''>
                                     <br/>
                                     <br/>
                                     Data od:
                                     <input type="date" name="from">
-                                    <br/>
                                     <br/>
                                     Data do:
                                     <input type="date" name="to">
@@ -121,29 +42,52 @@
                                         Szukaj
                                     </button>
                                     <br/>
+                                </form>
                             </div>
                         </div>
                     </div>
 
+                    {% if chosen_tags and chosen_sources %}
+                        <h3>Wybrane tagi:</h3>
+                            {% for tag in chosen_tags %}
+                                {{ tag }}<br/>
+                            {% endfor %}
+                        <h3>Wybrane źródła:</h3>
+                            {% for source in chosen_sources %}
+                                {{ source }}<br/>
+                            {% endfor %}
+                        <h3>Przedział czasowy:</h3>
+                            Od: {{ date_from|date:'Y-m-d' }}<br/>
+                            Do: {{ date_to|date:'Y-m-d' }}
+                    {% endif %}
+                <br/>
                     {% for article in articles %}
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                </br>
-                                    <h2 class="title">{{ article.title }} <a href="{{ article.link }}" type="submit" class="btn btn-info btn-fill pull-right"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  Artykuł</a></h2>
+                                    </br>
+                                    <a href="{{ article.link }}">
+                                        <h2 class="title">{{ article.title }}</h2>
+                                    </a>
                                     <hr>
                                 </div>
                                 <div class="content">
-                                    <img src="{{ article.imageLink }}" alt="{{ article.sourceID }}" height="100" width="100" border="1px">
+                                    <img src="{{ article.imageLink }}" alt="{{ article.sourceID }}" height="100"
+                                         width="100" border="1px">
                                     <p>{{ article.text }}</p>
                                     <br>
                                     <br>
                                 </div>
                                 <div class="content">
                                     <hr>
-                                    <p><b><i class="fa fa-hashtag" aria-hidden="true"></i> Tagi:</b> {{ article.tags }}<p>
-                                    <p><b><i class="fa fa-info-circle" aria-hidden="true"></i> Źródło:</b> {{ article.sourceID }} <b><i class="fa fa-users" aria-hidden="true"></i> Autor:</b> {{ article.author }}
-                                        <b><i class="fa fa-calendar-o" aria-hidden="true"></i> Data:</b> {{ article.timestamp }}</p>
+                                    <p><b><i class="fa fa-hashtag" aria-hidden="true"></i> Tagi:</b> {{ article.tags }}
+                                    <p>
+                                    <p><b><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                        Źródło:</b> {{ article.sourceID }} <b><i class="fa fa-users"
+                                                                                 aria-hidden="true"></i>
+                                        Autor:</b> {{ article.author }}
+                                        <b><i class="fa fa-calendar-o" aria-hidden="true"></i>
+                                            Data:</b> {{ article.timestamp }}</p>
                                 </div>
                             </div>
                         </div>
@@ -154,4 +98,43 @@
         </div>
     </div>
 
-    {% endblock %}
+    <script type="text/javascript">
+        //document.forms[0].reset();
+        var input1 = document.querySelector('input[name=tags]');
+        // init Tagify script on the above inputs
+        tagify1 = new Tagify(input1, {
+            whitelist: {{ tags_list|safe }},
+            maxTags: 7,
+            enforeWhitelist: true,
+            autocomplete: true
+        });
+
+        var input2 = document.querySelector('input[name=sources]');
+        // init Tagify script on the above inputs
+        tagify1 = new Tagify(input2, {
+            whitelist: {{ sources_list|safe }},
+            enforeWhitelist: true,
+            autocomplete: true
+        });
+
+
+        // add tag callback
+        function onAddTag(e) {
+            console.log(e, e.detail);
+        }
+
+        // remove tag callback
+        function onRemoveTag(e) {
+            console.log(e, e.detail);
+        }
+
+        function onDuplicateAdded(e) {
+            console.log(e, e.detail);
+        }
+
+        //tagify1.on('add', onAddTag);
+        //tagify1.on('remove', onRemoveTag);
+        //tagify1.on('duplicate', onDuplicateAdded);
+    </script>
+
+{% endblock %}
