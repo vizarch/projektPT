@@ -3872,6 +3872,18 @@ input.default{
 
 
 
+.cd-user-modal {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.cd-user-modal.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+
 /*Artykuły*/
 .w3-image{max-width:100%;height:auto}img{margin-bottom:-5px}a{color:inherit}
 .w3-table,.w3-table-all{border-collapse:collapse;border-spacing:0;width:100%;display:table}.w3-table-all{border:1px solid #ccc}
