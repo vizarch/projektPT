@@ -24,6 +24,8 @@ def login_view(request):
         #  sprawdzenie czy haslo pasuje do uzytkownika
         if user is not None:
             login(request, user)
+        else:
+            messages.error(request, 'Błędny login lub hasło.')
     return redirect('main_app:start_page')  # bez wzgledu na wynik logowania przekirowanie do glownej
 
 @login_required(login_url='/')
@@ -62,7 +64,7 @@ def register_view(request):
             """.format(username, HOST_NAME, username, activation_code))
 
         send_mail(subject, text, EMAIL_HOST_USER, [email], fail_silently=False)  # wyslanie maila
-
+        messages.info(request,'Kliknij w link aktywacyjny wysłany na podany adres e-mail.')
     return redirect('main_app:start_page')
 
 def activate(request, username, activation_code):
@@ -74,6 +76,9 @@ def activate(request, username, activation_code):
         user.is_active = True
         user.save()  # django domyslnie update'uje krotke, chyba ze wymusimy utworzenie nowej
         logout(request)  # wylogowanie user'a, bo klikniecie w link aktywacyjny od razu go loguje tez
+        messages.success(request, 'Aktywacja konta udana.')
+    else:
+        messages.error(request, 'Aktywacja konta nie udała się. Skontaktuj się z administratorem.')
     return redirect('main_app:start_page')
 
 @login_required(login_url='/')
@@ -91,18 +96,19 @@ def change_password(request):
         # sprawdza stare haslo user'a
         # authenticate zwraca obiekt 'User' jesli haslo pasuje do uzytkownika, else zwraca None
         if user is None:
-            # TODO: podano zle stare haslo
-            # MESSAGES
-            pass
+            messages.error(request, 'Podano złe aktualne hasło!')
+            return redirect('user_account:user_profile')
         new_pass1 = request.POST.get('new_pass1')
         new_pass2 = request.POST.get('new_pass2')
         if new_pass1 != new_pass2:
-            # TODO: hasla sa rozne
-            # MESSAGES
-            pass
+            messages.error(request, 'Nowe hasło powtórz dwukrotnie!')
+            return redirect('user_account:user_profile')
         user.set_password(new_pass1)
         user.save()
         update_session_auth_hash(request, user)  # aktualizacja biezacej sesji dla user'a z nowym haslem
+        messages.success(request, 'Zmiana hasła powiodła się.')
+    else:
+        messages.error(request, 'Żadne pole hasła nie może być puste!')
     return redirect('user_account:user_profile')
 
 @login_required(login_url='/')
@@ -128,11 +134,16 @@ def change_email(request):
 
         send_mail(subject,text,EMAIL_HOST_USER,[new_email],fail_silently=False)  # wyslanie maila
         logout(request)
-    return redirect('main_app:start_page')
+        messages.success(request, 'Zmiana adresu e-mail powiodła się.')
+        return redirect('main_app:start_page')
+    else:
+        messages.error(request, 'Adres e-mail nie może być pusty!')
+        return redirect('user_account:user_profile')
 
 @login_required(login_url='/')
 def account_delete(request):
     user = get_object_or_404(User, username=request.user)
     # user.is_active = False  # TODO: usuwac czy deaktywowac uzytkownika??
     user.delete()  # usuwa uzytkownika i wszystkie dane z nim powiazane
+    messages.success(request, 'Usunięto konto.')
     return redirect('main_app:start_page')

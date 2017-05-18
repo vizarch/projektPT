@@ -7,7 +7,7 @@
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand">Dashboard</a>
+                    <a class="navbar-brand">Wyszukiwarka</a>
                 </div>
             </div>
         </nav>
@@ -64,6 +64,7 @@
                             <p><b>Przedział czasowy: </b>
                               Od: {{ date_from|date:'Y-m-d' }}
                               Do: {{ date_to|date:'Y-m-d' }}</p>
+                            <p><b>Znaleziono: </b> {{ articles.count }} artykułów</p>
                           </div>
                           </div>
                         </div>

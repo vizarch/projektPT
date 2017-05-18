@@ -11,6 +11,12 @@ def start_page(request):
 def sources_and_tags(request, tag_id=None):
     all_sources = Sources.objects.order_by('name')
     all_tags = Tags.objects.order_by('name')
+    data = {
+            "sources": all_sources,
+            "tags": all_tags,
+            "user": request.user
+        }
+
     if tag_id is not None:
         chosen_tag = all_tags.filter(id=tag_id).first()
         linked_articles = Articles.objects.filter(articletagmap__tagID=tag_id)
@@ -19,13 +25,9 @@ def sources_and_tags(request, tag_id=None):
                 "sources": all_sources,
                 "tags": all_tags,
                 "linked_articles": linked_articles,
-                "chosen_tag": chosen_tag
+                "chosen_tag": chosen_tag,
+                "user": request.user
             }
-    else:
-        data = {
-            "sources": all_sources,
-            "tags": all_tags
-        }
     return render(request, 'main_app/Sources_and_Tags.html', data)
 
 @login_required
@@ -54,7 +56,7 @@ def board(request):
             found_articles = Articles.objects\
                 .filter(articletagmap__tagID__in=tags_objects)\
                 .filter(timestamp__gte=date_from, timestamp__lte=date_to)\
-                .distinct()
+                .distinct().order_by('-timestamp')
         else:
             source_objects = []
             for source in sources:
@@ -68,7 +70,7 @@ def board(request):
                 .filter(sourceID__in=source_objects)\
                 .filter(articletagmap__tagID__in=tags_objects) \
                 .filter(timestamp__gte=date_from, timestamp__lte=date_to)\
-                .distinct()
+                .distinct().order_by('-timestamp')
 
         tags_list = [str(tag.name) for tag in Tags.objects.order_by('name')]
         sources_list = [str(source.name) for source in Sources.objects.order_by('name')]
