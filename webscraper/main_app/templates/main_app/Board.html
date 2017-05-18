@@ -53,7 +53,7 @@
 
                             <p><b>Wybrane tagi: </b>
                               {% for tag in chosen_tags %}
-                                <b>#</b>{{ tag }}
+                                {{ tag }} | 
                               {% endfor %}</p>
 
                             <p><b>Wybrane Źródła: </b>
@@ -94,7 +94,11 @@
                                 </div>
                                 <div class="content">
                                     <hr>
-                                    <p><b><i class="fa fa-hashtag" aria-hidden="true"></i> Tagi:</b> {{ article.tags }}
+                                    <p><b><i class="fa fa-hashtag" aria-hidden="true"></i> 
+                                    Tagi:</b> 
+                                        {% for tag in article.tags_list %}
+                                            {{ tag }} | 
+                                        {% endfor %}
                                     <p><b><i class="fa fa-info-circle" aria-hidden="true"></i> Źródło:</b> {{ article.sourceID }}
                                        <b><i class="fa fa-users"aria-hidden="true"></i> Autor:</b> {{ article.author }}
                                       <b><i class="fa fa-calendar-o" aria-hidden="true"></i> Data:</b> {{ article.timestamp }}</p>

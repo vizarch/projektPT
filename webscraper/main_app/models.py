@@ -36,6 +36,9 @@ class Articles(models.Model):
     def __str__(self):
         return self.title
 
+    def tags_list(self):
+        return self.tags.split(",")
+
     class Meta:
         verbose_name_plural = "artykuły"
         verbose_name = "artykuł"

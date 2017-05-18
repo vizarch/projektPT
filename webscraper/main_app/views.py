@@ -4,6 +4,7 @@ from .models import *
 from django.db.models import Q  # it's for OR, AND in SQL
 from datetime import datetime
 from pytz import timezone  # python timezones
+from django.contrib import messages  # TODO
 
 def start_page(request):
         return render(request, 'main_app/Home.html')

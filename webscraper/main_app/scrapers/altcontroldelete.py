@@ -80,7 +80,8 @@ def main_articles(pages):
                     ul = i.find(class_="article-header-3d").ul.text
                     kat, tg = ul.split("Tagi:")
                     tagi, ods = tg.split("Odsłony:")
-                    tags = tagi.strip()
+                    tags = tagi.strip().split(",")
+                    tags = ','.join([tag.lower() for tag in tags])
                 except:
                     print("Error")
                     continue

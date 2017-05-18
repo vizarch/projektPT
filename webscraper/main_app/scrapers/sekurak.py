@@ -62,7 +62,7 @@ def main_articles(pages):
 
                 tmp = requests.get(link)  # have to open page for scrap all tags
                 soup2 = BeautifulSoup(tmp.text,'lxml')
-                tags = ','.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
+                tags = ','.join([i.text.lower() for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
                 text = i.p.text
             except:
                 print("Error MAIN")
@@ -95,7 +95,7 @@ def w_biegu_articles(pages):
 
                 tmp = requests.get(link)
                 soup2 = BeautifulSoup(tmp.text,'lxml')
-                tags = ','.join([i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
+                tags = ','.join([i.text.lower() for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
                 text = i.p.text
             except:
                 print("Error W BIEGU")
