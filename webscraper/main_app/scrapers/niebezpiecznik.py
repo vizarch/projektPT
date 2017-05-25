@@ -8,6 +8,16 @@ import  queue
 ARTICLES = queue.Queue()
 END = False
 
+def niebezpiecznik_date2_python_date(date):
+    a, b, c = date.split("\n")
+    day, month, year = c.split(".")
+    together = day + " " + month + " " + year
+    try:
+        datetime_object = date.strptime(together, '%d %m %Y')
+        datetime_object = datetime_object.replace(tzinfo=timezone('Europe/Warsaw'))
+    except ValueError:
+        raise
+    return  datetime_object
 
 def main_articles(pages):
     global ARTICLES
@@ -22,10 +32,8 @@ def main_articles(pages):
             try:
                 title = i.find(class_="title").h2.a.text
                 link = i.find(class_="title").h2.a['href']
-                tempDate = i.find(class_="date").text
-                a, b, c = tempDate.split("\n")
-                hours, minutes = b.split(":")
-                day, month, year = c.split(".")
+                date = i.find(class_="date").text
+                date = niebezpiecznik_date2_python_date(date)
                 text = i.find(class_="entry").p.text
                 tempTags = i.find(class_="postmeta").text
                 a, tags = tempTags.split("Tagi:")
