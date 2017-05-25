@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 import  requests
-from datetime import  datetime
-import  threading
+from datetime import datetime
+import threading
 from  pytz import  timezone
 import  queue
 
@@ -22,7 +23,7 @@ def niebezpiecznik_date2_python_date(date):
 def main_articles(pages):
     global ARTICLES
     for page in range(1, pages + 1):
-        webpage = requests.get("https://sekurak.pl/page/" + str(page) + "/")
+        webpage = requests.get("https://niebezpiecznik.pl/page/" + str(page) + "/")
         soup = BeautifulSoup(webpage.content, 'lxml')
 
         print("Page: " + str(webpage.url))
