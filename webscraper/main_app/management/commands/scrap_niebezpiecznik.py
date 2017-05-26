@@ -2,7 +2,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.db import IntegrityError
 from main_app.models import *
-from main_app.scrapers import altcontroldelete
+from main_app.scrapers import niebezpiecznik
 import threading
 
 class Command(BaseCommand):

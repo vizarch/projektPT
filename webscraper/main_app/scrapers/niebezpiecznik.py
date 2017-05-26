@@ -12,9 +12,16 @@ END = False
 def niebezpiecznik_date2_python_date(date):
     a, b, c = date.split("\n")
     day, month, year = c.split(".")
+    if(len(month) == 1):
+        month = str(0) + month
+    if(len(day) == 1):
+        day = str(0) + day
+    year = year[0:-1]
+
     together = day + " " + month + " " + year
+    print("tutaj " + together)
     try:
-        datetime_object = date.strptime(together, '%d %m %Y')
+        datetime_object = datetime.strptime(together, '%d %m %Y')
         datetime_object = datetime_object.replace(tzinfo=timezone('Europe/Warsaw'))
     except ValueError:
         raise
