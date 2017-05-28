@@ -2,20 +2,78 @@
 
 {% block middle %}
 
-<div class="wrapper">
-    <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">Profile</a>
+    <div class="wrapper">
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand">Profile</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2 style="word-spacing: 5px" class="title"> Dodaj profil
+                                    </h2>
+                                </div>
+                                <div class="content">
+                                    <form name="form" action="{% url 'main_app:profile' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label>Nazwa: </label>
+                                            <input class="" name='profile_name'>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><i class="fa fa-hashtag" aria-hidden="true"></i> Tagi <b>(max 7):</b></label>
+                                            <input class="search" name='tags'>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><i class="fa fa-file" aria-hidden="true"></i> Źródła <b>('wszystkie'):</b></label>
+                                            <input name='sources' value='wszystkie'>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-info btn-fill pull-right">
+                                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Dodaj
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% for profile in my_profiles %}
+                            Nazwa: {{ profile.profileName }}<br />
+                            Źródła: {{ profile.sources_list }}<br />
+                            Tagi: {{ profile.tags_list }}<br />
+                        {% endfor %}
+
+                    </div>
                 </div>
             </div>
-        </nav>
-
-        <div class="content">
-
         </div>
     </div>
-</div>
+
+    <script type="text/javascript">
+        var input1 = document.querySelector('input[name=tags]');
+        tagify1 = new Tagify(input1, {
+            whitelist: {{ tags_list|safe }},
+            maxTags: 7,
+            enforeWhitelist: true,
+            autocomplete: true
+        });
+
+        var input2 = document.querySelector('input[name=sources]');
+        // init Tagify script on the above inputs
+        tagify1 = new Tagify(input2, {
+            whitelist: {{ sources_list|safe }},
+            enforeWhitelist: true,
+            autocomplete: true
+        });
+    </script>
 
 {% endblock %}

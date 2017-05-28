@@ -21,19 +21,13 @@ class ArticleTagMapAdmin(admin.ModelAdmin):
     model = ArticleTagMap
     list_displat = ('id','tagID','articleID')
 
-class SourceProfileAdmin(admin.ModelAdmin):
-    model = SourceProfile
-    list_display = ('id','userID','sourceID')
-
-class TagsProfileAdmin(admin.ModelAdmin):
-    model = TagsProfile
-    list_display = ('id','userID','tagID')
+class SearchProfilesAdmin(admin.ModelAdmin):
+    model = SearchProfiles
+    list_display = ('id', 'userID', 'profileName','sources_list', 'tags_list')
 
 
-admin.site.register(Sources, SourcesAdmin)
+admin.site.register(SearchProfiles, SearchProfilesAdmin)
 admin.site.register(Tags, TagsAdmin)
 admin.site.register(Articles,ArticlesAdmin)
 admin.site.register(ArticleTagMap, ArticleTagMapAdmin)
-admin.site.register(SourceProfile, SourceProfileAdmin)
-admin.site.register(TagsProfile, TagsProfileAdmin)
 

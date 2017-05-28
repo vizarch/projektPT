@@ -101,4 +101,21 @@ def board(request):
 
 @login_required
 def profile(request):
-    return render(request, 'main_app/Profile.html')
+    if request.method == 'POST' and request.POST.get('tags') != '' and request.POST.get('sources') != '' and \
+            request.POST.get('profile_name') != '':
+        profile_name = request.POST.get('profile_name')
+        tags = ','.join(request.POST.get('tags').split(","))
+        sources = ','.join(request.POST.get('sources').split(","))
+        print(profile_name)
+        print(tags)
+        print(sources)
+        new_profile = SearchProfiles.objects.create(userID=request.user, profileName=profile_name, sources_list=sources, tags_list=tags)
+        new_profile.save()
+
+    my_profiles = SearchProfiles.objects.filter(userID=request.user)
+
+    data = {
+        "my_profiles": my_profiles
+    }
+
+    return render(request, 'main_app/Profile.html', data)

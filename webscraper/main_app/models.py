@@ -53,19 +53,13 @@ class ArticleTagMap(models.Model):
         verbose_name = "artykuł-tag"
 
 # tabele dla profilu uzytkownika
-class SourceProfile(models.Model):
+class SearchProfiles(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
-    sourceID = models.ForeignKey(Sources, on_delete=models.CASCADE)
-    profileNumber = models.SmallIntegerField()
+    profileName = models.CharField(max_length=150)
+    sources_list = models.TextField()
+    tags_list = models.TextField()
 
     class Meta:
-        verbose_name_plural = "użytkownicy-źródła"
-        verbose_name = "użytkownik-źródło"
+        verbose_name_plural = "profile wyszukiwania"
+        verbose_name = "profil wyszukiwania"
 
-class TagsProfile(models.Model):
-    userID = models.ForeignKey(User, on_delete=models.CASCADE)
-    tagID = models.ForeignKey(Tags, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name_plural = "użytkownicy-tagi"
-        verbose_name = "użytkownik-tag"
