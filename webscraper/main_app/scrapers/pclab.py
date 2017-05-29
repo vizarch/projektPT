@@ -39,10 +39,12 @@ def main_articles(pages):
                 date = pclab_date2_python_date(date)
                 image_link = " http://pclab.pl" + i.find(class_="text").a.img['src']
                 tags = i.find(class_="tags").text
+                a, tags = tags.split("Tagi:")
             except:
                 print("Error:", link)
                 continue
 
+            tags = ','.join([tag.replace("\n", "").replace("\xa0", "") for tag in tags.split(",")])
             one_article = {"title": title, "date": date, "author": author, "link": link,
                            "tags": tags, "text": text, "image_link": image_link}
             ARTICLES.put(one_article)
