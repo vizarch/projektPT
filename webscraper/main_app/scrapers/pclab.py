@@ -29,17 +29,19 @@ def main_articles(pages):
 
         pclab = soup.find_all(class_="element")
         for i in pclab:
-
-            link = "http://pclab.pl" + i.find(class_="title").a['href']
-            text = i.find(class_="text").p.text
-            title = i.find(class_="title").a.text
-            temp_info = i.find(class_="info").text
-            author, date, c, d = temp_info.split("|")
-            date = date[1:-1]
-            date = pclab_date2_python_date(date)
-            image_link = " http://pclab.pl" + i.find(class_="text").a.img['src']
-            tags = i.find(class_="tags").text
-
+            try:
+                link = "http://pclab.pl" + i.find(class_="title").a['href']
+                text = i.find(class_="text").p.text
+                title = i.find(class_="title").a.text
+                temp_info = i.find(class_="info").text
+                author, date, c, d = temp_info.split("|")
+                date = date[1:-1]
+                date = pclab_date2_python_date(date)
+                image_link = " http://pclab.pl" + i.find(class_="text").a.img['src']
+                tags = i.find(class_="tags").text
+            except:
+                print("Error:", link)
+                continue
 
             one_article = {"title": title, "date": date, "author": author, "link": link,
                            "tags": tags, "text": text, "image_link": image_link}
