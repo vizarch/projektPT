@@ -113,8 +113,13 @@ def profile(request):
         new_profile.save()
 
     my_profiles = SearchProfiles.objects.filter(userID=request.user)
+    tags_list = [str(tag.name) for tag in Tags.objects.order_by('name')]
+    sources_list = [str(source.name) for source in Sources.objects.order_by('name')]
+    sources_list.append("wszystkie")
 
     data = {
+        "sources_list": sources_list,
+        "tags_list": tags_list,
         "my_profiles": my_profiles
     }
 

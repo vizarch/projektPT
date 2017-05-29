@@ -128,7 +128,8 @@
             whitelist: {{ tags_list|safe }},
             maxTags: 7,
             enforeWhitelist: true,
-            autocomplete: true
+            autocomplete: true,
+            suggestionsMinChars: 1
         });
 
         var input2 = document.querySelector('input[name=sources]');
@@ -136,7 +137,8 @@
         tagify1 = new Tagify(input2, {
             whitelist: {{ sources_list|safe }},
             enforeWhitelist: true,
-            autocomplete: true
+            autocomplete: true,
+            suggestionsMinChars: 1
         });
     </script>
 

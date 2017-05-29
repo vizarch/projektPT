@@ -52,7 +52,7 @@ class ArticleTagMap(models.Model):
         verbose_name_plural = "artykuły-tagi"
         verbose_name = "artykuł-tag"
 
-# tabele dla profilu uzytkownika
+# tabela dla profilu uzytkownika
 class SearchProfiles(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
     profileName = models.CharField(max_length=150)

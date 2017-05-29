@@ -7,7 +7,7 @@
             <nav class="navbar navbar-default navbar-fixed">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand">Profile</a>
+                        <a class="navbar-brand">Moje profile wyszukiwania</a>
                     </div>
                 </div>
             </nav>
@@ -46,12 +46,19 @@
                                 </div>
                             </div>
                         </div>
+                        {% if my_profiles %}
+                        <h2>Moje profile</h2>
+
                         {% for profile in my_profiles %}
+                            <hr>
                             Nazwa: {{ profile.profileName }}<br />
                             Źródła: {{ profile.sources_list }}<br />
                             Tagi: {{ profile.tags_list }}<br />
+                            <a href="#">Przycisk usuń</a>
+                            <a href="#">Przycisk szukaj</a>
                         {% endfor %}
 
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -64,7 +71,8 @@
             whitelist: {{ tags_list|safe }},
             maxTags: 7,
             enforeWhitelist: true,
-            autocomplete: true
+            autocomplete: true,
+            suggestionsMinChars: 1
         });
 
         var input2 = document.querySelector('input[name=sources]');
@@ -72,7 +80,8 @@
         tagify1 = new Tagify(input2, {
             whitelist: {{ sources_list|safe }},
             enforeWhitelist: true,
-            autocomplete: true
+            autocomplete: true,
+            suggestionsMinChars: 1
         });
     </script>
 
