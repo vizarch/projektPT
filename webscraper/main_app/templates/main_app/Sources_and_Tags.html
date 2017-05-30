@@ -34,25 +34,29 @@
 
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="header">
-                            <h4 class="title">Źródła</h4>
-                            <p class="category">Lorem Ipsum</p>
-                        </div>
+                          <div class="header">
+                              <h2  class="title"> Źródła
+                              </h2>
+                            <hr/>
+                          </div>
                         <div class="content">
                             {% for source in sources %}
-                                {{ source }}, ilość artykułów: {{ source.articles_set.count }}<br/>
+                              <p>{{ source }}, ilość artykułów: {{ source.articles_set.count }}</p>
                             {% endfor %}
+
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="header">
-                            <h4 class="title">Tagi</h4>
-                            <p class="category">Lorem Ipsum</p>
+                          <div class="header">
+                              <h2 class="title"> Tagi
+                              </h2>
+                            <hr/>
                         </div>
                         <div class="content">
+                          <p>
                             {% for tag in tags %}
                                 {% if user.is_authenticated %}
                                     <b>#</b><a href="{% url 'main_app:sources_and_tags' tag.id %}">{{ tag }}</a> (
@@ -62,7 +66,7 @@
                                     {{ tag.articletagmap_set.count }}),
                                 {% endif %}
                             {% endfor %}
-
+                          </p>
                         </div>
                     </div>
                 </div>

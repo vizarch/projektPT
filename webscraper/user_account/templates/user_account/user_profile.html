@@ -54,7 +54,7 @@
                             <form action="{% url 'user_account:account_delete' %}" method="post">
                                 {% csrf_token %}
                                 <br/>
-                                <button type="button" class="btn btn-info btn-fill"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń konto</button>
+                                <button style="background-color: red; border-color:red" type="button" class="btn btn-info btn-fill"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń konto</button>
                             </form>
 
                         </div>

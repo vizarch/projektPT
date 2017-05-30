@@ -7,7 +7,7 @@
             <nav class="navbar navbar-default navbar-fixed">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand">Moje profile wyszukiwania</a>
+                        <a class="navbar-brand">Profile</a>
                     </div>
                 </div>
             </nav>
@@ -19,15 +19,16 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h2 style="word-spacing: 5px" class="title"> Dodaj profil
-                                    </h2>
+                                  <h2 class="title">Dodaj Profil
+                                  </h2>
+                                  <hr/>
                                 </div>
+                                <form class="content" name="form" action="{% url 'main_app:profile' %}" method="POST">
                                 <div class="content">
-                                    <form name="form" action="{% url 'main_app:profile' %}" method="POST">
                                         {% csrf_token %}
                                         <div class="form-group">
-                                            <label>Nazwa: </label>
-                                            <input class="" name='profile_name'>
+                                            <label><i class="fa fa-tag" aria-hidden="true"></i> Nazwa: </label>
+                                            <input class="form-control" name='profile_name'>
                                         </div>
                                         <div class="form-group">
                                             <label><i class="fa fa-hashtag" aria-hidden="true"></i> Tagi <b>(max 7):</b></label>
@@ -37,31 +38,56 @@
                                             <label><i class="fa fa-file" aria-hidden="true"></i> Źródła <b>('wszystkie'):</b></label>
                                             <input name='sources' value='wszystkie'>
                                         </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-info btn-fill pull-right">
-                                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Dodaj
-                                            </button>
-                                        </div>
-                                    </form>
+                                </div>
+                                <button style="margin-left: 15px" type="submit" class="btn btn-info btn-fill pull-left">
+                                  <i class="fa fa-plus" aria-hidden="true"></i> Dodaj
+                                </button>
+                              </form>
+                                </br>
+                                </br>
+                                </br>
+                            </div>
+                        </div>
+
+                        {% if my_profiles %}
+                        {% for profile in my_profiles %}
+                        <div class="col-md-12">
+                            <div class="card" style="background-color: #232323; color: white; border-radius: 4px">
+                                <div class="header">
+                                    <h3 class="title"  style="color: white">
+                                      {{ profile.profileName }}
+                                      <a href="#">
+                                          <button style="margin-left: 10px; background-color: red; border-color: red" type="error" class="btn btn-info btn-fill pull-right">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                              Usuń
+                                          </button>
+                                      </a>
+                                      <a href="#">
+                                          <button type="submit" class="btn btn-info btn-fill pull-right">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                              Szukaj
+                                          </button>
+                                      </a>
+                                    </h3>
+                                    <hr/>
+                                </div>
+                                <div class="content">
+                                  <p><b><i class="fa fa-info-circle" aria-hidden="true"></i>Źródła:</b> {{ profile.sources_list }}</p>
+                                  <p><b><i class="fa fa-hashtag" aria-hidden="true"></i>Tagi:</b> {{ profile.tags_list }}</p>
+                                </div>
+                                <div class="content">
+
                                 </div>
                             </div>
                         </div>
-                        {% if my_profiles %}
-                        <h2>Moje profile</h2>
 
-                        {% for profile in my_profiles %}
-                            <hr>
-                            Nazwa: {{ profile.profileName }}<br />
-                            Źródła: {{ profile.sources_list }}<br />
-                            Tagi: {{ profile.tags_list }}<br />
-                            <a href="#">Przycisk usuń</a>
-                            <a href="#">Przycisk szukaj</a>
                         {% endfor %}
-
                         {% endif %}
+
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
