@@ -1,33 +1,64 @@
 {% extends 'main_app/base.html' %}
 
 {% block middle %}
-<div class="wrapper">
-<div class="main-panel">
-<nav class="navbar navbar-default navbar-fixed">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand">Web Scrapper</a>
-        </div>
-    </div>
-</nav>
+    <div class="wrapper">
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand">Web Scraper</a>
+                    </div>
+                </div>
+            </nav>
 
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-                <div class="col-md-12">
-                    <div class="card" >
-                        <div class="header" >
-                            <h4 class="title">Witaj poszukiwaczu !</h4>
-                        </div>
-                        <div class="content" >
-                              <p>{% lorem 3 p %}</p>
-                          </br>
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2 class="title">Witaj poszukiwaczu !</h2>
+                                </div>
+                                <div class="content">
+                                    <p style="font-size: 20px;">
+                                        Na tej stronie odkryjesz jak szybko, łatwo i precyzyjnie uzyskać interesujące
+                                        Cię informacje.<br />
+                                        Będziesz mógł poszerzyć swoje horyzonty i zainteresować się nowymi tematami,
+                                        poprzez przeglądanie naszych zbiorów.<br/>
+                                        Sprawa jest prosta: <br/>
+                                        <ol style="font-size: 16px;">
+                                            <li>Zaloguj się (lub zarejestruj jeśli nie masz jeszcze konta)</li>
+                                            <li>Obejrzyj dostępne źródła informacji i tagi</li>
+                                            <li>
+                                                W zakładce "Wyszkukiwarka" wybierz co Cię interesuje:<br />
+                                                tagi - według których przeszukamy dla Ciebie nasze zbiory, <br/>
+                                                źródła - z których czerpiemy informacje,<br/>
+                                                oraz przedział czasowy dla większej precyzji.
+                                            </li>
+                                            <li>
+                                                Możesz także ustalić swoje ulubione konfiguracje, a zrobisz to
+                                                w zakładce "Profile"
+                                            </li>
+                                        </ol>
+                                        <br />
+                                        <span style="font-size: 20px;">
+                                            Życzymy miłego surfowania po najlepszych częściach Internetu
+                                            {% if user.is_authenticated %}
+                                            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                                            <a href="{% url 'main_app:search' %}" style="color: #338caa;">Rozpocznij przygodę!</a>
+                                            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                                            {% endif %}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
-</div>
 
 
 

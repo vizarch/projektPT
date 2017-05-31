@@ -8,7 +8,10 @@ from django.contrib import messages  # TODO
 from django.db.models import Count
 
 def start_page(request):
-        return render(request, 'main_app/Home.html')
+    data = {
+        "user": request.user
+    }
+    return render(request, 'main_app/Home.html', data)
 
 def sources_and_tags(request, tag_id=None):
     all_sources = Sources.objects.annotate(num_articles=Count('articles')).order_by('-num_articles')

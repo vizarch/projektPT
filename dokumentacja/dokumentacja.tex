@@ -85,7 +85,10 @@
 			dawid.wiktorski@student.put.poznan.pl\\}
 	\end{titlepage}
 	\tableofcontents
+	\newpage
+	\listoffigures
 	\listoftables
+	
 	
 	\newpage
 	\section{Opis i uzasadnienie wyboru tematu}
@@ -192,7 +195,8 @@
 		\item moduł zbierający dane (scraper) - zbiera i przetwarza dane. \newline
 	\end{itemize}}
 
-	 Wymagania funkcjonalne systemu scharakteryzowano w tablicy 3. 
+	\subsection{Wymagania funkcjonalne}
+	Wymagania funkcjonalne systemu scharakteryzowano w tablicy 3. 
 	\definecolor{azure3}{rgb}{0.0, 0.7, 1.0}
 	\setlength\extrarowheight{10pt}
 	\begin{longtable}{ | C{5cm} | C{8cm} | C{4.5cm} |}
@@ -214,14 +218,6 @@
 		Możliwość przeglądania strony głównej serwisu. &
 		Użytkownicy \\ 
 		\hline
-		Rejestracja &
-		Możliwość zarejestrowania konta w serwisie. &
-		Użytkownik niezalogowany \\
-		\hline
-		Potwierdzenie rejestracji, zmiany hasła lub zmiany adresu e-mail konta&
-		Możliwość potwierdzenia rejestracji, zmiany hasła lub zmiany adresu e-mail konta poprzez kliknięcie link aktywacyjny wysłany pocztą elektroniczną.&
-		Użytkownik niezalogowany \\
-		\hline
 		Logowanie &
 		Możliwość logowania się do serwisu.&
 		Użytkownik niezalogowany \\
@@ -229,28 +225,44 @@
 		Wylogowanie & Możliwość wylogowania się z serwisu. &
 		Użytkownik zalogowany, administrator \\
 		\hline
+		Rejestracja &
+		Możliwość zarejestrowania konta w serwisie. &
+		Użytkownik niezalogowany \\
+		\hline
+		Potwierdzenie rejestracji linkiem aktywacyjnym.&
+		Po założeniu konta wysyłany jest link aktywacyjny na adres e-mail podany podczas rejestracji. Dopóki konto nie zostanie aktywowane poprzez kliknięcie w link, nie będzie można zalogować się.&
+		Użytkownik niezalogowany \\
+		\hline
 		Zmiana hasła do konta &
 		Możliwość zmiany hasła do aktywnego konta.&
 		Użytkownik zalogowany, administrator \\
+		\hline
+		Potwierdzenie zmiany hasła linkiem aktywacyjnym.&
+		Po zmianie hasła, konto jest deaktywowane i  wysyłany jest link aktywacyjny na adres e-mail podany podczas rejestracji. Dopóki konto nie zostanie aktywowane poprzez kliknięcie w link, nie będzie można zalogować się.&
+		Użytkownik niezalogowany \\
 		\hline
 		Zmiana adresu e-mail konta &
 		Możliwość zmiany adresu e-mail konta. &
 		Użytkownik zalogowany, administrator \\
 		\hline
-		Ustawienie profilu źródeł &
-		Możliwość wybrania źródeł, z których otrzymywane będą informacje. &
+		Potwierdzenie zmiany adresu e-mail linkiem aktywacyjnym.&
+		Po zmianie hasła, konto jest deaktywowane i  wysyłany jest link aktywacyjny na nowy adres e-mail. Dopóki konto nie zostanie aktywowane poprzez kliknięcie w link, nie będzie można zalogować się.&
+		Użytkownik niezalogowany \\
+		\hline
+		Możliwość wyszukiwania artykułów na podstawie źródeł, tagów i przedziału czasowego &
+		Możliwość ustalenia źródeł, tagów i wybrania przedziału czasowego, w celu przefiltrowania interesujących informacji. &
 		Użytkownik zalogowany, administrator \\
 		\hline
-		Ustawienie profilu tagów &
-		Możliwość wybrania tagów, na podstawie których filtrowane będą informacje. &
-		Użytkownik zalogowany, administrator \\
-		\hline
-		Ustawienie filtra daty &
-		Możliwość wybrania przedziału czasowego, na podstawie którego filtrowane będą informacje. &
+		Dodanie profilu z konfiguracją źródeł i tagów &
+		Możliwość wybrania tagów i źródeł, na podstawie których filtrowane będą informacje. &
 		Użytkownik zalogowany, administrator \\
 		\hline
 		Zbieranie danych ze strony i parsowanie ich &
-		Scraper zbiera dane ze strony, parsuje je oraz zapisuje do bazy danych. Jeden scraper zbiera dane z jednej strony. &
+		Scraper zbiera dane ze strony i parsuje je. Jeden scraper zbiera dane z jednej strony. &
+		Scraper \\
+		\hline
+		Zapis artykułów do bazy danych &
+		Po zebraniu i przetworzeniu artykułów przez scrapera, następuje zapis do bazy danych z uwzględnieniem narzuconego formatu. &
 		Scraper \\
 		\hline
 	\end{longtable}
@@ -258,13 +270,14 @@
 	\subsection{Wymagania pozafunkcjonalne}
 		\begin{itemize}
 		\item zainstalowany interpreter języka Python w wersji 3.5 lub wyższej,
-		\item zainstalowana biblioteka "BeautifulSoup",
+		\item zainstalowany framework Django w wersji 1.10.6,
+		\item zainstalowana biblioteka BeautifulSoup w wersji 4.5.3,
 		\item język interfejsu użytkownika: polski,
-		\item bezpieczne przechowywanie haseł w formie zahaszowanej.
+		\item bezpieczne przechowywanie haseł w formie zahaszowanej
+		\item budowa modułowa aplikacji, umożliwiająca dodawanie nowych scraperów.
 		\newline
 		\end{itemize}
 
-	\newpage
 	\section{Wybrane technologie i uzasadnienie}
 	\begin{itemize}
 		\item Back-end - \texttt{Python, Django}
@@ -275,19 +288,27 @@
 				\item wydajności	
 			\end{itemize}
 		\end{itemize}
+		\item scraping - \texttt{Python, BeautifulSoup}
+		\begin{itemize}
+			\item przejrzysta dokumentacja,
+			\item dobra wydajność,
+			\item duże możliwości konfiguracyjne,
+			\item prosta obsługa.
+		\end{itemize}
 		\item Front-end - \texttt{HTML5, Javascript}
 		\begin{itemize}
 			\item uniwersalna technologia, która jest wspierana przez wszystkie popularne przeglądarki internetowe
 		\end{itemize}
 		\item Baza danych - \texttt{SQLite}
 		\begin{itemize}
-			\item prosta integracja z językiem Python,
-			\item dobra we wstępnej fazie projektu
+			\item łatwa integracja z językiem Python,
+			\item dobra we wstępnej fazie projektu,
+			\item nie wymaga instalacji zewnętrznych bibliotek, programów do obsługi.
 		\end{itemize}
 	\end{itemize}
 	
 	\subsection{Biblioteka BeautifulSoup}
-	Bibliotek do wyciągania danych ze stron internetowych jest wiele, są to między innymi: \texttt{ Scrapy},\texttt{ BeautifulSoup}, \texttt{Urllib2},\texttt{ MarkupSafe} oraz \texttt{feedparser}. W projekcie wykorzystaliśmy bibliotekę BeautifulSoup, która przeznaczona jest dla języka Python. Umożliwia ona wyciąganie danych z plików HTML oraz XML. BeautifulSoup w wersji 4 współracuje z takimi parserami jak:\texttt{ Python html.parser},\texttt{ lxml HTML parser}, \texttt{lxml XML parser} i \texttt{htm5lib}. Po przeprowadzonych testach, lxml HTML parser okazał się najszybszym oraz najbardziej niezawodym parserem spośród wyżej wymienionych. Dużą zaletą biblioteki BeautifulSoup jest łatwa implemetacja w architekturze modułowej.
+	Bibliotek do wyciągania danych ze stron internetowych jest wiele, są to między innymi: \texttt{ Scrapy},\texttt{ BeautifulSoup}, \texttt{Urllib2},\texttt{ MarkupSafe} oraz \texttt{feedparser}. W projekcie wykorzystaliśmy bibliotekę BeautifulSoup, która przeznaczona jest dla języka Python. Umożliwia wyciąganie danych z plików HTML oraz XML. BeautifulSoup w wersji 4 współracuje z takimi parserami jak:\texttt{ Python html.parser},\texttt{ lxml HTML parser}, \texttt{lxml XML parser} i \texttt{htm5lib}. Po przeprowadzonych testach, lxml HTML parser okazał się najszybszym oraz najbardziej niezawodym parserem spośród wyżej wymienionych. Dużą zaletą biblioteki BeautifulSoup jest łatwa implementacja w architekturze modułowej.
 
 	\newpage
 	\section{Architektura rozwiązania}
@@ -331,11 +352,8 @@
 		Users &
 		Zawiera wszystkich użytkowników serwisu. \\
 		\hline
-		TagsProfile &
-		Łączy użytkownika z tagami, które wybrał. \\
-		\hline
-		SourceProfile &
-		Łączy użytkownika z źródłami danych, które wybrał. \\
+		SearchProfiles &
+		Zawiera listę źródeł i tagów przypisanych do użytkownika. \\
 		\hline
 	\end{longtable}
 	\newpage
@@ -421,12 +439,21 @@
 	\newpage
 	\section{Instrukcja użytkowania aplikacji}
 	W tym rozdziale przedstawiono interfejs strony internetowej wraz z instrukcją uzytkowania.
-	\subsection{Strona główna}
+	\subsection{Strona główna dla użytkownika niezalogowanego}
 	Po wejściu na stronę główną, użytkownikowi ukazuje się krótki opis funkcjonalności serwisu. Z tego miejsca użytkownik może przejść do kolejnej strony ze źródłami i tagami. Również ma możliwość zalogowania się lub założenia konta. Gdy, użytkownik poda złe dane w procesie logowania lub rejestracji, na stronie głównej pojawią się odpowiednie komunikaty. Na rysunku 2 ukazano stronę główną.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.45]{obrazki/stronaGlowna.png}
-		\caption{Strona główna}
+		\includegraphics[scale=0.40]{obrazki/stronaGlowna_niezalogowany.png}
+		\caption{Strona główna dla użytkownika niezalogowanego}
+		\label{fig:db_schema}
+	\end{figure}
+	
+	\subsection{Strona główna dla użytkownika zalogowanego}
+	Wygląda podobnie do strony dla niezalogowanych użytkowników, ale dodatkowo po prawej stronie widać menu oraz w opisie znajdziemy link kierujący do wyszukiwarki.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.40]{obrazki/stronaGlowna_zalogowany.png}
+		\caption{Strona główna dla użytkownika zalogowanego}
 		\label{fig:db_schema}
 	\end{figure}
 
@@ -441,39 +468,49 @@
 	\end{figure}
 	
 	\newpage
+	\subsection{Źródła | \#Tagi dla użytkownika zalogowanego}
+	Użytkownik zalogowany na stronie ze źródłami i tagami ma możliwość nie tylko przejrzenia z jakich stron internetowych zbierane są dane i jakie tagi występują w bazie danych. Strona ta została rozszerzona o dodatkowe funkcjonalności. Użytkownik po kliknięciu na dany tag, otrzymuje listę powiązanych artykułów  z wybranym tagiem. Dodatkowo, po kliknięciu na dany artykuł, użytkownik przechodzi bezpośrednio do strony internetowej z artykułem. Na rysunku 6 ukazano stronę ze źródłami i tagami dla użytkownika zalogowanego, po wybraniu tagu \texttt{oprogramowanie}.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.45]{obrazki/zalogowanyZrodla.png}
+		\caption{Źródła | \#Tagi dla użytkownika zalogowanego}
+		\label{fig:db_schema}
+	\end{figure}
+	
+	\newpage
 	\subsection{Wyszukiwarka}
-\begin{figure}[H]
+	Ta zakładka oferuje główną funkcjonalność serwisu. W pierwszym polu wybieramy tagi (maksymalnie 7) - dzięki technologii JavaScript pole umożliwia aktywne proponowanie tagów.
+	Nie istnieje możliwość wyboru tagu, którego nie ma w bazie danych.
+	\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.45]{obrazki/wyszukiwarka.png}
 	\caption{Wyszukiwarka}
-	\label{fig:db_schema}
-\end{figure}
-
-
-	\newpage
-	\subsection{Profile}
-	\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.45]{obrazki/profile.png}
-	\caption{Profile}
 	\label{fig:db_schema}
 	\end{figure}
 
 
 	\newpage
-	\subsection{Źródła | \#Tagi dla użytkownika zalogowanego}
-	Użytkownik zalogowany na stronie ze źródłami i tagami ma możliwość nie tylko przejrzenia z jakich stron internetowych zbierane są dane i jakie tagi występują w bazie danych. Strona ta została rozszerzona o dodatkowe funkcjonalności. Użytkownik po kliknięciu na dany tag, otrzymuje listę powiązanych artykułów  z wybranym tagiem. Dodatkowo, po kliknięciu na dany artykuł, użytkownik przechodzi bezpośrednio do strony internetowej z artykułem. Na rysunku 6 ukazano stronę ze źródłami i tagami dla użytkownika zalogowanego, po wybraniu tagu \texttt{oprogramowanie}.
-\begin{figure}[H]
+	\subsection{Profile}
+	Zakładka "Profile" umożliwia stworzenie dowolnej ilości profili wyszukiwania oraz bezpośrednie przejście do wyszukiwania poprzez naciśnięcie przycisku "Szukaj".
+	\begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.45]{obrazki/zalogowanyZrodla.png}
-	\caption{Źródła | \#Tagi dla użytkownika zalogowanego}
+	\includegraphics[scale=0.40]{obrazki/profile1.png}
+	\caption{Profile - dodawanie}
 	\label{fig:db_schema}
-\end{figure}
-	
+	\end{figure}
+	\newpage
+	Dodano profil o nazwie "Mój ulubiony"
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.40]{obrazki/profile2.png}
+		\caption{Profile - przegląd}
+		\label{fig:db_schema}
+	\end{figure}
+
 	
 	\newpage
 	\subsection{Ustawienia}
-	W ustawieniach, użytkownik ma możliwość zmiany hasła, zmiany adresu e-mail oraz usunięcia swojego konta. Na tej stronie, pojawią się również komunikaty związane z powyżej wymienonymi akcjami, które użytkownik jest w stanie zrobić. Gdy, użytkownik zmieni swój adres e-mail, automatycznie zostanie wylogowany i przekierowany do strony głównej. Na rysunku 7 ukazano stronę z ustawieniami.
+	W ustawieniach, użytkownik ma możliwość zmiany hasła, zmiany adresu e-mail oraz usunięcia swojego konta. Na tej stronie, pojawią się również komunikaty związane z powyżej wymienionymi akcjami, które użytkownik jest w stanie zrobić. Gdy użytkownik zmieni swój adres e-mail, automatycznie zostanie wylogowany i przekierowany do strony głównej. Na rysunku 7 ukazano stronę z ustawieniami.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.45]{obrazki/ustawienia.png}
