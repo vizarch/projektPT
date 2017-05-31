@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.db.models import Q  # it's for OR, AND in SQL
@@ -32,9 +32,10 @@ def sources_and_tags(request, tag_id=None):
     return render(request, 'main_app/Sources_and_Tags.html', data)
 
 @login_required
-def board(request):
+def search(request):
     if request.method == 'POST' and request.POST.get('tags') != '' and request.POST.get('sources') != '' \
             and request.POST.get('from') != '' and request.POST.get('to') != '':
+        print(request.POST.get('tags'))
         tags = request.POST.get('tags').split(",")
         sources = request.POST.get('sources').split(",")
         date_from = request.POST.get('from')
@@ -87,7 +88,7 @@ def board(request):
             "date_from": date_from,
             "date_to": date_to
         }
-        return render(request, 'main_app/Board.html', data)
+        return render(request, 'main_app/Search.html', data)
     else:
         tags_list = [str(tag.name) for tag in Tags.objects.order_by('name')]
         sources_list = [str(source.name) for source in Sources.objects.order_by('name')]
@@ -97,7 +98,7 @@ def board(request):
             "tags_list": tags_list,
             "sources_list": sources_list
         }
-    return render(request, 'main_app/Board.html', data)
+    return render(request, 'main_app/Search.html', data)
 
 @login_required
 def profile(request):
@@ -124,3 +125,17 @@ def profile(request):
     }
 
     return render(request, 'main_app/Profile.html', data)
+
+
+@login_required
+def delete_profile(request, profile_id):
+    profile_obj = SearchProfiles.objects.filter(id=profile_id).first()
+    if profile_obj.userID == request.user:
+        profile_obj.delete()
+    return redirect("main_app:profile")
+
+@login_required
+def search_from_profile(request, profile_id):
+    profile_obj = SearchProfiles.objects.filter(id=profile_id).first()
+    if profile_obj.userID == request.user:
+        tags = profile_obj.tags_list

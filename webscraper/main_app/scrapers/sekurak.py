@@ -62,7 +62,7 @@ def main_articles(pages):
 
                 tmp = requests.get(link)  # have to open page for scrap all tags
                 soup2 = BeautifulSoup(tmp.text,'lxml')
-                tags = ','.join([i.text.lower() for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
+                tags = [i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')]
                 text = i.p.text
             except:
                 print("Error MAIN")
@@ -72,7 +72,18 @@ def main_articles(pages):
             except:
                 image_link = "http://www.securitum.pl/logo_sekurak.png"
 
-            one_article = {"title": title, "date": date, "link": link,"tags":tags, "image_link": image_link, "text":text}
+            tags_list = []
+            for tmp in tags:
+                tmp = tmp.lower()
+                tmp = tmp.replace("\n", "")
+                if tmp[0] == " ":
+                    tmp = tmp[1:]
+                if tmp[-1] == " ":
+                    tmp = tmp[:-1]
+
+                tags_list.append(tmp)
+
+            one_article = {"title": title, "date": date, "link": link,"tags":tags_list, "image_link": image_link, "text":text}
             ARTICLES.put(one_article)
 
 def w_biegu_articles(pages):
@@ -95,16 +106,32 @@ def w_biegu_articles(pages):
 
                 tmp = requests.get(link)
                 soup2 = BeautifulSoup(tmp.text,'lxml')
-                tags = ','.join([i.text.lower() for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')])
+                tags = [i.text for i in soup2.article.find_all('div',class_='meta')[1].find_all('a')]
                 text = i.p.text
             except:
                 print("Error W BIEGU")
                 continue
             
             image_link = "http://www.securitum.pl/logo_sekurak.png"  # w biegu nie maja obrazka
-            one_article = {"title": title, "date": date, "link": link,"tags":tags, "image_link": image_link, "text":text}
+            tags_list = []
+            for tmp in tags:
+                tmp = tmp.lower()
+                tmp = tmp.replace("\n", "")
+                if tmp[0] == " ":
+                    tmp = tmp[1:]
+                if tmp[-1] == " ":
+                    tmp = tmp[:-1]
+
+                tags_list.append(tmp)
+
+            one_article = {"title": title, "date": date, "link": link, "tags": tags_list, "image_link": image_link, "text":text}
             ARTICLES.put(one_article)
 
+
+def test():
+    while not ARTICLES.empty():
+        i = ARTICLES.get()
+        print(i['tags'])
 
 def scrapshot(pages):
     global END

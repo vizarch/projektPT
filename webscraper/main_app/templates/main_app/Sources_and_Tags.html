@@ -59,11 +59,11 @@
                           <p>
                             {% for tag in tags %}
                                 {% if user.is_authenticated %}
-                                    <b>#</b><a href="{% url 'main_app:sources_and_tags' tag.id %}">{{ tag }}</a> (
-                                    {{ tag.articletagmap_set.count }}),
+                                    <b>#</b><a href="{% url 'main_app:sources_and_tags' tag.id %}">{{ tag }}</a>
+                                    ({{ tag.articletagmap_set.count }}),
                                 {% else %}
-                                    <b>#</b>{{ tag }} (
-                                    {{ tag.articletagmap_set.count }}),
+                                    <b>#</b>{{ tag }}
+                                    ({{ tag.articletagmap_set.count }}),
                                 {% endif %}
                             {% endfor %}
                           </p>

@@ -25,7 +25,7 @@
                                   <hr/>
                                 </div>
                                 <div class="content">
-                                    <form name="form" action="{% url 'main_app:board' %}" method="POST">
+                                    <form name="form" action="{% url 'main_app:search' %}" method="POST">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <label><i class="fa fa-hashtag" aria-hidden="true"></i> Tagi <b>(max 7):</b></label>

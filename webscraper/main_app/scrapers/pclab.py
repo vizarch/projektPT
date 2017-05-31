@@ -44,11 +44,25 @@ def main_articles(pages):
                 print("Error:", link)
                 continue
 
-            tags = ','.join([tag.replace("\n", "").replace("\xa0", "") for tag in tags.split(",")])
+            tags_list = []
+            for tmp in tags.split(","):
+                tmp = tmp.replace("\n","")
+                if tmp[0] == " ":
+                    tmp = tmp[1:]
+                if tmp[-1] == " ":
+                    tmp = tmp[:-1]
+
+                tags_list.append(tmp)
+
             one_article = {"title": title, "date": date, "author": author, "link": link,
-                           "tags": tags, "text": text, "image_link": image_link}
+                           "tags": tags_list, "text": text, "image_link": image_link}
             ARTICLES.put(one_article)
 
+
+def test():
+    while not ARTICLES.empty():
+        i = ARTICLES.get()
+        print(i['tags'])
 
 def scrapshot(pages):
     global END

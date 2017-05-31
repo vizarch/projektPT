@@ -15,12 +15,12 @@ class Command(BaseCommand):
         pages = options['pages'][0]
 
         # create new Source or find exist Source
-        new_source = Sources(name="pclab.pl")
+        new_source = Sources(name="pclab.pl/news.html")
         try:
             new_source.save()
         except IntegrityError:
             # Source exists, so find it
-            new_source = Sources.objects.get(name="pclab.pl")
+            new_source = Sources.objects.get(name="pclab.pl/news.html")
 
         # run thread for scraper
         start = threading.Thread(target=pclab.scrapshot, args=(pages,))
@@ -35,8 +35,9 @@ class Command(BaseCommand):
                 continue
 
             # add Article
+            tags_string_list = ','.join([tag for tag in one_art['tags']])
             art = Articles(sourceID=new_source, title=one_art['title'], author=one_art['author'], timestamp=one_art['date'],
-                           tags=one_art['tags'], text=one_art['text'], link=one_art['link'],
+                           tags=tags_string_list, text=one_art['text'], link=one_art['link'],
                            imageLink=one_art['image_link'])
             try:
                 art.save()
@@ -44,10 +45,8 @@ class Command(BaseCommand):
                 continue  # skip this article
 
             # add Tags
-            tags = one_art['tags'].split(",")
+            tags = one_art['tags']
             for tmp_tag in tags:
-                if tmp_tag[0] == " ":
-                    tmp_tag = tmp_tag[1:]
                 tag = Tags(name=str(tmp_tag))
                 try:
                     tag.save()  # add tag if it's new

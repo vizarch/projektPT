@@ -45,7 +45,7 @@ def main_articles(pages):
                     soup1 = BeautifulSoup(page1.content, 'lxml')
 
                     artykul = soup1.find(class_='tags font-heading-master')
-                    tags = ','.join([i.text.lower() for i in artykul.find_all('a')])
+                    tags = [i.text for i in artykul.find_all('a')]
                 except:
                     print("Error")
                     continue
@@ -62,10 +62,25 @@ def main_articles(pages):
                     if author is None:
                         author = "dobreprogramy"
 
+                tags_list = []
+                for tmp in tags:
+                    tmp = tmp.lower()
+                    tmp = tmp.replace("\n", "")
+                    if tmp[0] == " ":
+                        tmp = tmp[1:]
+                    if tmp[-1] == " ":
+                        tmp = tmp[:-1]
+
+                    tags_list.append(tmp)
+
                 one_article = {"title": title, "date": date, "author": author, "link": link,
-                               "tags": tags, "text": text, "imageLink": imagelink}
+                               "tags": tags_list, "text": text, "imageLink": imagelink}
                 ARTICLES.put(one_article)
 
+def test():
+    while not ARTICLES.empty():
+        i = ARTICLES.get()
+        print(i['tags'])
 
 def scrapshot(pages):
     global END
