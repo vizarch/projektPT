@@ -5,13 +5,14 @@ from django.db.models import Q  # it's for OR, AND in SQL
 from datetime import datetime
 from pytz import timezone  # python timezones
 from django.contrib import messages  # TODO
+from django.db.models import Count
 
 def start_page(request):
         return render(request, 'main_app/Home.html')
 
 def sources_and_tags(request, tag_id=None):
-    all_sources = Sources.objects.order_by('name')
-    all_tags = Tags.objects.order_by('name')
+    all_sources = Sources.objects.annotate(num_articles=Count('articles')).order_by('-num_articles')
+    all_tags = Tags.objects.annotate(num_sources=Count('articletagmap')).order_by('-num_sources')
     data = {
             "sources": all_sources,
             "tags": all_tags,
@@ -105,8 +106,20 @@ def profile(request):
     if request.method == 'POST' and request.POST.get('tags') != '' and request.POST.get('sources') != '' and \
             request.POST.get('profile_name') != '':
         profile_name = request.POST.get('profile_name')
-        tags = ','.join(request.POST.get('tags').split(","))
-        sources = ','.join(request.POST.get('sources').split(","))
+        tags = []
+        for tmp in request.POST.get('tags').split(","):
+            if tmp[0] == " ":
+                tmp = tmp[1:]
+            tags.append(tmp)
+        tags = ','.join(tags)
+
+        sources = []
+        for tmp in request.POST.get('sources').split(","):
+            if tmp[0] == " ":
+                tmp = tmp[1:]
+            sources.append(tmp)
+        sources = ','.join(sources)
+
         print(profile_name)
         print(tags)
         print(sources)
@@ -138,4 +151,19 @@ def delete_profile(request, profile_id):
 def search_from_profile(request, profile_id):
     profile_obj = SearchProfiles.objects.filter(id=profile_id).first()
     if profile_obj.userID == request.user:
-        tags = profile_obj.tags_list
+        profile_tags = profile_obj.tags_list
+        profile_sources = profile_obj.sources_list
+
+        tags_list = [str(tag.name) for tag in Tags.objects.order_by('name')]
+        sources_list = [str(source.name) for source in Sources.objects.order_by('name')]
+        sources_list.append("wszystkie")
+
+        data = {
+            "tags_list": tags_list,
+            "sources_list": sources_list,
+            "profile_tags": profile_tags,
+            "profile_sources": profile_sources
+        }
+        return render(request, 'main_app/Search.html', data)
+    else:
+        return redirect("main_app:search")

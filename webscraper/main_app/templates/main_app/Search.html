@@ -1,7 +1,7 @@
 {% extends 'main_app/base.html' %}
 
 {% block middle %}
-
+{% load custom_filters %}
     <div class="wrapper">
         <div class="main-panel">
             <nav class="navbar navbar-default navbar-fixed">
@@ -29,11 +29,19 @@
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <label><i class="fa fa-hashtag" aria-hidden="true"></i> Tagi <b>(max 7):</b></label>
+                                            {% if profile_tags %}
+                                            <input class="search" name="tags" value="{{ profile_tags|pretty_list:', ' }}">
+                                            {% else %}
                                             <input class="search" name='tags'>
+                                            {% endif %}
                                         </div>
                                         <div class="form-group">
                                             <label><i class="fa fa-file" aria-hidden="true"></i> Źródła <b>('wszystkie'):</b></label>
-                                            <input name='sources' value='wszystkie'>
+                                            {% if profile_sources %}
+                                            <input class="search" name="sources" value="{{ profile_sources|pretty_list:', ' }}">
+                                            {% else %}
+                                            <input class="search" name="sources" value="wszystkie">
+                                            {% endif %}
                                         </div>
                                         <div class="form-group">
                                             <p style="word-spacing: 5px">Od: <input class="default" type="date"
@@ -61,14 +69,15 @@
                                                 {{ tag }} |
                                             {% endfor %}</p>
 
-                                        <p><b>Wybrane Źródła: </b>
+                                        <p><b>Wybrane źródła: </b>
                                             {% for source in chosen_sources %}
-                                                {{ source }}<br/>
+                                                {{ source }} |
                                             {% endfor %}</p>
 
                                         <p><b>Przedział czasowy: </b>
-                                            Od: {{ date_from|date:'Y-m-d' }}
-                                            Do: {{ date_to|date:'Y-m-d' }}</p>
+                                            <br />Od: {{ date_from|date:'d E Y' }}
+                                            <br />Do: {{ date_to|date:'d E Y' }}
+                                        </p>
                                         <p><b>Znaleziono: </b> {{ articles.count }} artykułów</p>
                                     </div>
                                 </div>

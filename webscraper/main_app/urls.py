@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^profile/del/(?P<profile_id>[0-9]+)/$', views.delete_profile, name='delete_profile'),
+    url(r'^profile/search/(?P<profile_id>[0-9]+)/$', views.search_from_profile, name='search_from_profile'),
 ]

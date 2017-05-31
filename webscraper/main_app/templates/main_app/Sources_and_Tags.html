@@ -41,7 +41,7 @@
                           </div>
                         <div class="content">
                             {% for source in sources %}
-                              <p>{{ source }}, ilość artykułów: {{ source.articles_set.count }}</p>
+                                <p>{{ source }}, ilość artykułów: <span class="badge">{{ source.articles_set.count }}</span></p>
                             {% endfor %}
 
                         </div>
@@ -63,7 +63,7 @@
                                     ({{ tag.articletagmap_set.count }}),
                                 {% else %}
                                     <b>#</b>{{ tag }}
-                                    ({{ tag.articletagmap_set.count }}),
+                                    {{ tag.articletagmap_set.count }},
                                 {% endif %}
                             {% endfor %}
                           </p>
