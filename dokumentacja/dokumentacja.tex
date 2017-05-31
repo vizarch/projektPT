@@ -420,5 +420,65 @@
 	
 	\newpage
 	\section{Instrukcja użytkowania aplikacji}
+	W tym rozdziale przedstawiono interfejs strony internetowej wraz z instrukcją uzytkowania.
+	\subsection{Strona główna}
+	Po wejściu na stronę główną, użytkownikowi ukazuje się krótki opis funkcjonalności serwisu. Z tego miejsca użytkownik może przejść do kolejnej strony ze źródłami i tagami. Również ma możliwość zalogowania się lub założenia konta. Gdy, użytkownik poda złe dane w procesie logowania lub rejestracji, na stronie głównej pojawią się odpowiednie komunikaty. Na rysunku 2 ukazano stronę główną.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.45]{obrazki/stronaGlowna.png}
+		\caption{Strona główna}
+		\label{fig:db_schema}
+	\end{figure}
+
+	\newpage
+	\subsection{Źródła | \#Tagi dla użytkownika niezalogowanego}
+	Na stronie związanej ze źródłami i tagami, użytkownik niezalogowany ma możliwość przejrzenia z jakich stron internetowych zbierane są dane. Przy każdym źródle pokazana jest liczba artykułów, które obecnie przechowywane są w bazie danych. Poniżej źródeł, wymienione są tagi, które również przechowywane są w bazie danych. Obok każdego z tagów występuje liczba, która wskazuje, ile jest artykułów związanych z danym tagiem. Na rysunku 3 ukazano stronę ze źródłami i tagami.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.45]{obrazki/niezalogowanyZrodla.png}
+		\caption{Źródła | \#Tagi dla użytkownika niezalogowanego}
+		\label{fig:db_schema}
+	\end{figure}
+	
+	\newpage
+	\subsection{Wyszukiwarka}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{obrazki/wyszukiwarka.png}
+	\caption{Wyszukiwarka}
+	\label{fig:db_schema}
+\end{figure}
+
+
+	\newpage
+	\subsection{Profile}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{obrazki/profile.png}
+	\caption{Profile}
+	\label{fig:db_schema}
+	\end{figure}
+
+
+	\newpage
+	\subsection{Źródła | \#Tagi dla użytkownika zalogowanego}
+	Użytkownik zalogowany na stronie ze źródłami i tagami ma możliwość nie tylko przejrzenia z jakich stron internetowych zbierane są dane i jakie tagi występują w bazie danych. Strona ta została rozszerzona o dodatkowe funkcjonalności. Użytkownik po kliknięciu na dany tag, otrzymuje listę powiązanych artykułów  z wybranym tagiem. Dodatkowo, po kliknięciu na dany artykuł, użytkownik przechodzi bezpośrednio do strony internetowej z artykułem. Na rysunku 6 ukazano stronę ze źródłami i tagami dla użytkownika zalogowanego, po wybraniu tagu \texttt{oprogramowanie}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{obrazki/zalogowanyZrodla.png}
+	\caption{Źródła | \#Tagi dla użytkownika zalogowanego}
+	\label{fig:db_schema}
+\end{figure}
+	
+	
+	\newpage
+	\subsection{Ustawienia}
+	W ustawieniach, użytkownik ma możliwość zmiany hasła, zmiany adresu e-mail oraz usunięcia swojego konta. Na tej stronie, pojawią się również komunikaty związane z powyżej wymienonymi akcjami, które użytkownik jest w stanie zrobić. Gdy, użytkownik zmieni swój adres e-mail, automatycznie zostanie wylogowany i przekierowany do strony głównej. Na rysunku 7 ukazano stronę z ustawieniami.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.45]{obrazki/ustawienia.png}
+		\caption{Ustawienia}
+		\label{fig:db_schema}
+	\end{figure}
 	
 \end{document}
