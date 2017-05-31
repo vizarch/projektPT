@@ -269,16 +269,15 @@
 	\begin{itemize}
 		\item Back-end - \texttt{Python, Django}
 		\begin{itemize}
-			\item stosunkowo krótki czas tworzenia aplikacji przy jednoczesnym zachowaniu pełnej funkcjonalności, stabilności i wydajności
+			\item stosunkowo krótki czas tworzenia aplikacji przy jednoczesnym zachowaniu: \begin{itemize}
+				\item pełnej funkcjonalości,
+				\item stabilności,
+				\item wydajności	
+			\end{itemize}
 		\end{itemize}
 		\item Front-end - \texttt{HTML5, Javascript}
 		\begin{itemize}
 			\item uniwersalna technologia, która jest wspierana przez wszystkie popularne przeglądarki internetowe
-		\end{itemize}
-		\item Moduły do scrapowania - \texttt{biblioteka BeautifulSoup}
-		\begin{itemize}
-			\item technologie przeznaczone do parsowania stron,
-			\item łatwa implementacja architektury modułowej
 		\end{itemize}
 		\item Baza danych - \texttt{SQLite}
 		\begin{itemize}
@@ -286,12 +285,16 @@
 			\item dobra we wstępnej fazie projektu
 		\end{itemize}
 	\end{itemize}
+	
+	\subsection{Biblioteka BeautifulSoup}
+	Bibliotek do wyciągania danych ze stron internetowych jest wiele, są to między innymi: \texttt{ Scrapy},\texttt{ BeautifulSoup}, \texttt{Urllib2},\texttt{ MarkupSafe} oraz \texttt{feedparser}. W projekcie wykorzystaliśmy bibliotekę BeautifulSoup, która przeznaczona jest dla języka Python. Umożliwia ona wyciąganie danych z plików HTML oraz XML. BeautifulSoup w wersji 4 współracuje z takimi parserami jak:\texttt{ Python html.parser},\texttt{ lxml HTML parser}, \texttt{lxml XML parser} i \texttt{htm5lib}. Po przeprowadzonych testach, lxml HTML parser okazał się najszybszym oraz najbardziej niezawodym parserem spośród wyżej wymienionych. Dużą zaletą biblioteki BeautifulSoup jest łatwa implemetacja w architekturze modułowej.
+
 	\newpage
 	\section{Architektura rozwiązania}
 	W projekcie została wykorzystana relacyjna baza danych SQLite. Na rysunku 1 przedstawiono schemat relayjny bazy danych. 
 		\begin{figure}[H]
 			\centering
-			\includegraphics[scale=0.5]{obrazki/schemat_bd.png}
+			\includegraphics[scale=0.68]{obrazki/schemat_bd.png}
 			\caption{Schemat bazy danych}
 			\label{fig:db_schema}
 		\end{figure}
@@ -337,13 +340,24 @@
 	\end{longtable}
 	\newpage
 	\section{Interesujące problemy i ich rozwiązania}
+	Podczas implementacji modułów, w każdym z nich, spotkano się z problemem wyciągania potrzebnych danych ze stron internetowych. Przy parsowaniu stron, najczęściej nieznajdywanym elementem w artykule okazał się link do obrazka. Rozwiązaniem problemu było najpierw ustawienie domyślego obrazka dla danego modułu oraz wykorzystanie go, gdy parser nie poradził sobie ze znalezieniem obrazka w artykule.   
 		\subsection{Moduł scrapujący sekurak.pl}
 			Serwis sekurak.pl zawiera dwa rodzaje artykułów, które pobieramy. Pierwszy rodzaj znajduje się w kategorii "teksty", a drugi "w biegu". Scraper został podzielony na dwa wątki, każdy dla jednej z tych kategorii. To spowodowało przyspieszenie procesu zbierania o około 50\%. Algorytm sekwencyjny dla jednej strony artykułów wykonywał się około 24 s. Algorytm wielowątkowy około 14 s.
 		\subsection{Moduł scrapujący altcontroldelete.pl}
 			W serwisie altcontroldelete.pl data publikacji artykułu może być podana w języku polskim lub angielskim. Rozwiązaniem problemu było utworzenie dwóch słowników, które w odpowiedni sposób zinterpretują podaną datę. 
 	\newpage
 	\section{Opis stron internetowych, z których zbierane są informacje}
+	Strony internetowe, z których zbierane są dane to:
+	\begin{itemize}
+	\item \url{www.sekurak.pl},
+	\item \url{www.dobreprogramy.pl/Blog.html}
+	\item \url{www.niebezpiecznik.pl}
+	\item \url{www.pclab.pl/news.html}
+	\item \url{www.altcontroldelete.pl}
+	\end{itemize}  
+	Poniżej w podrozdziałach przedstawiono dane, które są zbierane z każdej ze stron internetowych.
 		\subsection{sekurak.pl}
+		W tablicy 5 pokazano dane, które są zbierane ze strony sekurak.pl
 		\begin{table}[H]
 			\centering
 			\caption{Parametry artykułów - sekurak.pl}
@@ -356,6 +370,7 @@
 		\end{table}
 
 		\subsection{dobreprogramy.pl/Blog.html} 
+		W tablicy 6 pokazano dane, które są zbierane ze strony dobreprogramy.pl/Blog.html
 		\begin{table}[H]
 			\centering
 			\caption{Parametry artykułów - dobreprogramy.pl}
@@ -366,7 +381,8 @@
 				\hline
 			\end{tabular}
 		\end{table}
-		\subsection{niebezpiecznik.pl} 
+		\subsection{niebezpiecznik.pl}
+		W tablicy 7 pokazano dane, które są zbierane ze strony niebezpiecznik.pl
 		\begin{table}[H]
 			\centering
 			\caption{Parametry artykułów - niebezpiecznik.pl}
@@ -377,10 +393,11 @@
 				\hline
 			\end{tabular}
 		\end{table}
-		\subsection{pclab.pl} 
+		\subsection{pclab.pl/news.html} 
+		W tablicy 8 pokazano dane, które są zbierane ze strony pclab.pl/news.html
 		\begin{table}[H]
 			\centering
-			\caption{Parametry artykułów - pclab.pl}
+			\caption{Parametry artykułów - pclab.pl/news.html}
 			\label{z3s_parametry}
 			\begin{tabular}{ | C{1.5cm} | C{4cm} | C{1.5cm} | C{1.5cm} | C{1.5cm} | C{3cm} | C{1.5cm} | @{}m{0pt}@{}}
 				\hline
@@ -389,6 +406,7 @@
 			\end{tabular}
 		\end{table}
 		\subsection{altcontroldelete.pl} 
+		W tablicy 9 pokazano dane, które są zbierane ze strony altcontroldelete.pl
 		\begin{table}[H]
 			\centering
 			\caption{Parametry artykułów - altcontroldelete.pl}
