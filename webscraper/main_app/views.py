@@ -39,7 +39,6 @@ def sources_and_tags(request, tag_id=None):
 def search(request):
     if request.method == 'POST' and request.POST.get('tags') != '' and request.POST.get('sources') != '' \
             and request.POST.get('from') != '' and request.POST.get('to') != '':
-        print(request.POST.get('tags'))
         tags = request.POST.get('tags').split(",")
         sources = request.POST.get('sources').split(",")
         date_from = request.POST.get('from')
@@ -123,9 +122,6 @@ def profile(request):
             sources.append(tmp)
         sources = ','.join(sources)
 
-        print(profile_name)
-        print(tags)
-        print(sources)
         new_profile = SearchProfiles.objects.create(userID=request.user, profileName=profile_name, sources_list=sources, tags_list=tags)
         new_profile.save()
 

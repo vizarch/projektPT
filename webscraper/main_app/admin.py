@@ -26,6 +26,7 @@ class SearchProfilesAdmin(admin.ModelAdmin):
     list_display = ('id', 'userID', 'profileName','sources_list', 'tags_list')
 
 
+admin.site.register(Sources, SourcesAdmin)
 admin.site.register(SearchProfiles, SearchProfilesAdmin)
 admin.site.register(Tags, TagsAdmin)
 admin.site.register(Articles,ArticlesAdmin)

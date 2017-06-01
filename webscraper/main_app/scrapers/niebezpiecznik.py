@@ -11,7 +11,14 @@ END = False
 
 def niebezpiecznik_date2_python_date(date):
     a, b, c = date.split("\n")
-    day, month, year = c.split(".")
+    
+    if "." in c:
+        day, month, year = c.split(".")
+    elif "/" in c:
+        day, month, year = c.split("/")
+    else:
+        raise
+    
     if len(month) == 1:
         month = str(0) + month
     if len(day) == 1:
@@ -45,7 +52,10 @@ def main_articles(pages):
                 temp_tags = i.find(class_="postmeta").text
                 a, tags = temp_tags.split("Tagi:")
                 author = a.split()[1:3]
-                image_link = i.find(class_="entry").a.img['src']
+                try:
+                    image_link = i.find(class_="entry").a.img['src']
+                except:
+                    image_link = "http://www.ipblog.pl/wp-content/uploads/2013/12/niebezpiecznik-logotyp-e1387270249671.png"
             except:
                 print("Error:", link)
                 continue
@@ -74,7 +84,7 @@ def main_articles(pages):
 def test():
     while not ARTICLES.empty():
         i = ARTICLES.get()
-        print(i['tags'])
+        print(i['date'])
 
 def scrapshot(pages):
     global END
