@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[polish]{babel}
 \usepackage{polski}
+\usepackage{indentfirst}
 % czcionka Times
 \usepackage[T1]{fontenc}
 \usepackage{mathptmx}
@@ -41,6 +42,28 @@
 \usepackage{graphicx}
 % listingi
 \usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
 
 \fancypagestyle{firstpage}{					% strona tytulowa
 	\renewcommand{\headrulewidth}{0pt}
@@ -89,7 +112,10 @@
 	\tableofcontents
 	\newpage
 	\listoffigures
+	\renewcommand{\listtablename}{Spis tabel}
 	\listoftables
+	\renewcommand{\lstlistlistingname}{Spis listingów}
+	\lstlistoflistings
 	
 	
 	\newpage
@@ -137,7 +163,7 @@
 
 		\end{tabular}
 	\end{table}
-	
+	\newpage
 	\subsection{Podział prac pomiędzy członków zespołu}
 	W tablicy 2 przedstawiono podział prac pomiędzy członków zespołu.
 	\definecolor{azure}{rgb}{0.0, 0.4, 1.0}
@@ -279,7 +305,7 @@
 		\item budowa modułowa aplikacji, umożliwiająca dodawanie nowych scraperów.
 		\newline
 		\end{itemize}
-
+	\newpage
 	\section{Wybrane technologie i uzasadnienie}
 	\begin{itemize}
 		\item Back-end - \texttt{Python, Django}
@@ -440,7 +466,7 @@
 	
 	\newpage
 	\section{Instrukcja użytkowania aplikacji}
-	W tym rozdziale przedstawiono interfejs strony internetowej wraz z instrukcją uzytkowania.
+	W tym rozdziale przedstawiono interfejs strony internetowej wraz z instrukcją użytkowania.
 	\subsection{Strona główna dla użytkownika niezalogowanego}
 	Po wejściu na stronę główną, użytkownikowi ukazuje się krótki opis funkcjonalności serwisu. Z tego miejsca użytkownik może przejść do kolejnej strony ze źródłami i tagami. Również ma możliwość zalogowania się lub założenia konta. Gdy, użytkownik poda złe dane w procesie logowania lub rejestracji, na stronie głównej pojawią się odpowiednie komunikaty. Na rysunku 2 ukazano stronę główną.
 	\begin{figure}[H]
@@ -451,7 +477,7 @@
 	\end{figure}
 	
 	\subsection{Strona główna dla użytkownika zalogowanego}
-	Wygląda podobnie do strony dla niezalogowanych użytkowników, ale dodatkowo po prawej stronie widać menu oraz w opisie znajdziemy link kierujący do wyszukiwarki.
+	Wygląda podobnie do strony dla niezalogowanych użytkowników, ale dodatkowo po lewej stronie widać menu oraz w opisie znajdziemy link kierujący do wyszukiwarki.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.40]{obrazki/stronaGlowna_zalogowany.png}
@@ -464,7 +490,7 @@
 	Na stronie związanej ze źródłami i tagami, użytkownik niezalogowany ma możliwość przejrzenia z jakich stron internetowych zbierane są dane. Przy każdym źródle pokazana jest liczba artykułów, które obecnie przechowywane są w bazie danych. Poniżej źródeł, wymienione są tagi, które również przechowywane są w bazie danych. Obok każdego z tagów występuje liczba, która wskazuje, ile jest artykułów związanych z danym tagiem. Na rysunku 3 ukazano stronę ze źródłami i tagami.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.45]{obrazki/niezalogowanyZrodla.png}
+		\includegraphics[scale=0.40]{obrazki/niezalogowanyZrodla.png}
 		\caption{Źródła | \#Tagi dla użytkownika niezalogowanego}
 		\label{fig:db_schema}
 	\end{figure}
@@ -474,7 +500,7 @@
 	Użytkownik zalogowany na stronie ze źródłami i tagami ma możliwość nie tylko przejrzenia z jakich stron internetowych zbierane są dane i jakie tagi występują w bazie danych. Strona ta została rozszerzona o dodatkowe funkcjonalności. Użytkownik po kliknięciu na dany tag, otrzymuje listę powiązanych artykułów  z wybranym tagiem. Dodatkowo, po kliknięciu na dany artykuł, użytkownik przechodzi bezpośrednio do strony internetowej z artykułem. Na rysunku 6 ukazano stronę ze źródłami i tagami dla użytkownika zalogowanego, po wybraniu tagu \texttt{oprogramowanie}.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.45]{obrazki/zalogowanyZrodla.png}
+		\includegraphics[scale=0.40]{obrazki/zalogowanyZrodla.png}
 		\caption{Źródła | \#Tagi dla użytkownika zalogowanego}
 		\label{fig:db_schema}
 	\end{figure}
@@ -486,8 +512,16 @@
 	\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.45]{obrazki/wyszukiwarka.png}
-	\caption{Wyszukiwarka}
+	\caption{Wyszukiwarka - panel}
 	\label{fig:db_schema}
+	\end{figure}
+	\newpage
+	Poniżej panelu wyszukiwania pojawia się wybrana przez nas konfiguracja, a jeszcze niżej wyniki wyszukiwania. Widzimy tytuł artykułu, obrazek i fragment tekstu artykułu, tagi, źródło, autora oraz datę publikacji.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.27]{obrazki/wyszukiwarka2.png}
+		\caption{Wyszukiwarka - wyniki}
+		\label{fig:db_schema}
 	\end{figure}
 
 
@@ -525,13 +559,20 @@
 	Aplikacja została zbudowana w oparciu o moduły scrapujące oraz część odpowiedzialną za komunikację z bazą danych i prezentację danych. Istnieje możliwość dołączania modułów scrapujących w celu rozszerzenia oferowanych informacji. W ostatecznej produkcyjnej wersji trzeba pomyśleć o zmianie systemu zarządzania bazą danych z SQLite na inną, skalowalną i dostosowaną do przetwarzania dużej ilości danych, np. PostgreSQL, MySQL.
 	
 	\newpage
-	\subsection{Interesujące części implementacji}
-	\begin{lstlisting}
+	\section{Interesujące fragmenty implementacji}
+	W tej częsci dokumentacji zostaną przedstawione 
+	najciekawsze fragmenty kodu. Poniższy listing pokazuje w jaki sposób został zaimplementowany algortm, który zbiera dane ze strony www.pclab.pl/news.html. Na początku w zmiennej webpage zapisywana jest cała strona internetowa, następnie za pomocą odpowiedniej metody w BeautifulSoup zostaje sparsowana.  
+	
+	
+	Pierwsze szukane elementy na stronie noszą nazwę  \texttt{element}. W elementach tych, umieszczone są artykuły. W kolejnych liniach kodu, w każdym z wyszukanych elemenentów, znajdywane są kolejne niezbędne dan, między innymi: link do artykułu, autor i tagi. 
+	W kolejnej pętli ustalany jest odpowiedni format zapisywania tagów, aby tagi oddzielane były tylko znakiem przecinka.
+	\lstset{style=mystyle}
+	\begin{lstlisting}[caption={Scraper pclab}]
 	for page in range(1, pages + 1):
 		webpage = requests.get("http://pclab.pl/news-" + str(page) + ".html")
 		soup = BeautifulSoup(webpage.content, 'lxml')
 		
-		print("Page: " + str(webpage.url))
+		print("Page:" + str(webpage.url))
 		
 		pclab = soup.find_all(class_="element")
 		for i in pclab:
@@ -559,10 +600,16 @@
 				tmp = tmp[:-1]
 			
 				tags_list.append(tmp)
-			
-			one_article = {"title": title, "date": date, "author": author, "link": link,
-			"tags": tags_list, "text": text, "image_link": image_link}
-			ARTICLES.put(one_article)
+	\end{lstlisting}
+	\newpage
+	Na Listingu 2. następuje zebranie wcześniejszych danych do słownika \texttt{one\_article} oraz dodanie artykułu do kolejki \texttt{ARTICLES}. Następnie artykuły pobierane są w aplikacji Django i zapisywane do bazy danych.
+	\begin{lstlisting}[caption={Scraper pclab cd.}]
+	one_article = {
+					"title": title, "date": date, "author": author,
+					"link": link, "tags": tags_list, "text": text, 
+					"image_link": image_link
+				}
+	ARTICLES.put(one_article)
 	\end{lstlisting}
 	
 \end{document}
