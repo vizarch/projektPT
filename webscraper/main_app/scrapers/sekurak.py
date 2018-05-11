@@ -70,7 +70,7 @@ def main_articles(pages):
             try:
                 image_link = i.find('div',class_='entry excerpt').img['src']
             except:
-                image_link = "http://www.securitum.pl/logo_sekurak.png"
+                image_link = "https://sekurak.pl/wp-content/uploads/2013/03/sekurak3d-150x150.png"
 
             tags_list = []
             for tmp in tags:
@@ -112,7 +112,7 @@ def w_biegu_articles(pages):
                 print("Error W BIEGU")
                 continue
             
-            image_link = "http://www.securitum.pl/logo_sekurak.png"  # w biegu nie maja obrazka
+            image_link = "https://sekurak.pl/wp-content/uploads/2013/03/sekurak3d-150x150.png"  # w biegu nie maja obrazka
             tags_list = []
             for tmp in tags:
                 tmp = tmp.lower()
